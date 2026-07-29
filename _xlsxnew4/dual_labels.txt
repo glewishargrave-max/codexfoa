@@ -1,0 +1,100 @@
+1: 
+2: Name
+3: Code
+4: Icon
+5: Tier
+6: Class 1
+7: Class 2
+8: Gender
+9: Associated Demon
+10: Quote
+11: Description
+12: Mechanic
+13: Lore
+14: Appearance
+15: Req Dex
+16: Req Int
+17: Req Str
+18: Req Wis
+19: Req Cha
+20: Req End
+21: Req Luc
+22: Req Wil
+23: Dex Growth
+24: Int Growth
+25: Str Growth
+26: Wis Growth
+27: Cha Growth
+28: End Growth
+29: Luc Growth
+30: Wil Growth
+31: Weapon Name
+32: Weapon Mech
+33: Weapon Stats
+34: Armor Name
+35: Armor Stats
+36: Ability Count
+37: Major 1
+38: Major 2
+39: Major 3
+40: Major 4
+41: Major 5
+42: Major 6
+43: Major 7
+44: Major 8
+45: Major 9
+46: Major 10
+47: Major 11
+48: Major 12
+49: Major 13
+50: Major 14
+51: Major 15
+52: Move 1
+53: Move 2
+54: Move 3
+55: Move 4
+56: Move 5
+57: Move 6
+58: Move 7
+59: Move 8
+60: Move 9
+61: Move 10
+62: Minor 1
+63: Minor 2
+64: Minor 3
+65: Minor 4
+66: Minor 5
+67: Minor 6
+68: Minor 7
+69: Minor 8
+70: 
+71: Minor 10
+72: Capstone Skill
+73: Class Skill 1
+74: Class Skill 2
+75: Class Skill 3
+76: Class Skill 4
+77: Class Skill 5
+78: Class Skill 6
+79: Class Skill 7
+80: Class Skill 8
+81: Class Skill 9
+82: Class Skill 10
+83: Class Skill 11
+84: Class Skill 12
+85: Parent Skills
+86: Effect Skills
+87: Skill Mods
+88: PassiveU
+89: PassiveG1
+90: PassiveG2
+91: PassiveS1
+92: PassiveS2
+93: PassiveS3
+94: PassiveS4
+95: PassiveL1
+96: PassiveL2
+97: PassiveL3
+98: PassiveL4
+99: PassiveL5
+100: PassiveL6

@@ -1,0 +1,17 @@
+2(B): 100
+3(C): Archer
+4(D): Barbarian
+5(E): Bard
+6(F): Binder
+7(G): Cleric
+8(H): Fighter
+9(I): Knight
+10(J): Monk
+11(K): Psychic
+12(L): Reaper
+13(M): Rogue
+14(N): Runemage
+15(O): Spellsword
+16(P): Teknixian
+17(Q): Witch
+18(R): Wizard

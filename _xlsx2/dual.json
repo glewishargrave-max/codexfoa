@@ -1,0 +1,923 @@
+[
+ {
+  "col": 1,
+  "Name": "100",
+  "Code": "0",
+  "Icon": "60",
+  "Class 2": "100",
+  "Class Skill 6": "0"
+ },
+ {
+  "col": 2,
+  "Name": "Blood Mage",
+  "Tier": "3",
+  "Class 1": "Reaper",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 3,
+  "Name": "Faith Healer",
+  "Tier": "3",
+  "Class 1": "Cleric",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 4,
+  "Name": "Guardian",
+  "Tier": "3",
+  "Class 1": "Knight",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 5,
+  "Name": "Mesmerist",
+  "Icon": "Yes",
+  "Tier": "3",
+  "Class 1": "Bard",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 6,
+  "Name": "Ranger",
+  "Icon": "Yes",
+  "Tier": "3",
+  "Class 1": "Archer",
+  "Class 2": "Fighter"
+ },
+ {
+  "col": 7,
+  "Name": "Shock Trooper",
+  "Tier": "3",
+  "Class 1": "Spellsword",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 8,
+  "Name": "Summoner",
+  "Icon": "Yes",
+  "Tier": "3",
+  "Class 1": "Binder",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 9,
+  "Name": "Thug",
+  "Icon": "Yes",
+  "Tier": "3",
+  "Class 1": "Barbarian",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 10,
+  "Name": "Beastmaster",
+  "Icon": "Yes",
+  "Tier": "4",
+  "Class 1": "Barbarian",
+  "Class 2": "Binder",
+  "Weapon Mech": "quicken all companions on critical"
+ },
+ {
+  "col": 11,
+  "Name": "Blackthorn",
+  "Icon": "Yes",
+  "Tier": "4",
+  "Class 1": "Archer",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 12,
+  "Name": "Blood Blade",
+  "Tier": "4",
+  "Class 1": "Reaper",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 13,
+  "Name": "Bravo",
+  "Icon": "Yes",
+  "Tier": "4",
+  "Class 1": "Bard",
+  "Class 2": "Fighter"
+ },
+ {
+  "col": 14,
+  "Name": "Daevic",
+  "Tier": "4",
+  "Class 1": "Monk",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 15,
+  "Name": "Paladin",
+  "Tier": "4",
+  "Class 1": "Cleric",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 16,
+  "Name": "Technomancer",
+  "Icon": "Yes",
+  "Tier": "4",
+  "Class 1": "Teknixian",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 17,
+  "Name": "Trickster",
+  "Tier": "4",
+  "Class 1": "Rogue",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 18,
+  "Name": "Eldritch Warrior",
+  "Tier": "5",
+  "Class 1": "Fighter",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 19,
+  "Name": "Enchanter",
+  "Icon": "Yes",
+  "Tier": "5",
+  "Class 1": "Bard",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 20,
+  "Name": "Esoteric",
+  "Icon": "Yes",
+  "Tier": "5",
+  "Class 1": "Binder",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 21,
+  "Name": "Hexblade",
+  "Tier": "5",
+  "Class 1": "Spellsword",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 22,
+  "Name": "Inquisitor",
+  "Icon": "Yes",
+  "Tier": "5",
+  "Class 1": "Archer",
+  "Class 2": "Cleric"
+ },
+ {
+  "col": 23,
+  "Name": "Judge",
+  "Tier": "5",
+  "Class 1": "Knight",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 24,
+  "Name": "Totemist",
+  "Icon": "Yes",
+  "Tier": "5",
+  "Class 1": "Barbarian",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 25,
+  "Name": "Vivisectionist",
+  "Tier": "5",
+  "Class 1": "Reaper",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 26,
+  "Name": "Drifter",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Monk",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 27,
+  "Name": "Exemplar",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Knight",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 28,
+  "Name": "Illusionist",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Psychic",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 29,
+  "Name": "Invoker",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Binder",
+  "Class 2": "Cleric"
+ },
+ {
+  "col": 30,
+  "Name": "Lore Keeper",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Runemage",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 31,
+  "Name": "Phantasm",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Bard",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 32,
+  "Name": "Reaver",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Barbarian",
+  "Class 2": "Fighter"
+ },
+ {
+  "col": 33,
+  "Name": "Sniper",
+  "Icon": "Yes",
+  "Tier": "8",
+  "Class 1": "Archer",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 34,
+  "Name": "Arcane Archer",
+  "Icon": "Yes",
+  "Tier": "10",
+  "Class 1": "Archer",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 35,
+  "Name": "Bear Warrior",
+  "Icon": "Yes",
+  "Tier": "10",
+  "Class 1": "Barbarian",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 36,
+  "Name": "Demonologist",
+  "Icon": "Yes",
+  "Tier": "10",
+  "Class 1": "Binder",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 37,
+  "Name": "Harrower",
+  "Tier": "10",
+  "Class 1": "Reaper",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 38,
+  "Name": "Musketeer",
+  "Tier": "10",
+  "Class 1": "Knight",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 39,
+  "Name": "Slayer",
+  "Tier": "10",
+  "Class 1": "Fighter",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 40,
+  "Name": "Songmage",
+  "Icon": "Yes",
+  "Tier": "10",
+  "Class 1": "Bard",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 41,
+  "Name": "Visionary",
+  "Tier": "10",
+  "Class 1": "Cleric",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 42,
+  "Name": "Bloodrager",
+  "Icon": "Yes",
+  "Tier": "11",
+  "Class 1": "Barbarian",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 43,
+  "Name": "Divine Blade",
+  "Tier": "11",
+  "Class 1": "Cleric",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 44,
+  "Name": "Fatalist",
+  "Tier": "11",
+  "Class 1": "Monk",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 45,
+  "Name": "Herald",
+  "Icon": "Yes",
+  "Tier": "11",
+  "Class 1": "Bard",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 46,
+  "Name": "Hexbow",
+  "Icon": "Yes",
+  "Tier": "11",
+  "Class 1": "Archer",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 47,
+  "Name": "Mentalist",
+  "Tier": "11",
+  "Class 1": "Psychic",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 48,
+  "Name": "Filch",
+  "Tier": "11",
+  "Class 1": "Rogue",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 49,
+  "Name": "Synergist",
+  "Icon": "Yes",
+  "Tier": "11",
+  "Class 1": "Binder",
+  "Class 2": "Fighter"
+ },
+ {
+  "col": 50,
+  "Name": "Avenger",
+  "Tier": "12",
+  "Class 1": "Cleric",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 51,
+  "Name": "Juggler",
+  "Icon": "Yes",
+  "Tier": "12",
+  "Class 1": "Archer",
+  "Class 2": "Bard"
+ },
+ {
+  "col": 52,
+  "Name": "Kaotek",
+  "Tier": "12",
+  "Class 1": "Reaper",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 53,
+  "Name": "Magus",
+  "Icon": "Yes",
+  "Tier": "12",
+  "Class 1": "Spellsword",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 54,
+  "Name": "Silhouette",
+  "Icon": "Yes",
+  "Tier": "12",
+  "Class 1": "Binder",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 55,
+  "Name": "Spelleater",
+  "Icon": "Yes",
+  "Tier": "12",
+  "Class 1": "Barbarian",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 56,
+  "Name": "Sybarite",
+  "Tier": "12",
+  "Class 1": "Fighter",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 57,
+  "Name": "Warder",
+  "Tier": "12",
+  "Class 1": "Knight",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 58,
+  "Name": "Channeler",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Bard",
+  "Class 2": "Binder"
+ },
+ {
+  "col": 59,
+  "Name": "Diabolist",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Witch",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 60,
+  "Name": "Fortune Teller",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Psychic",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 61,
+  "Name": "Nomad",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Archer",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 62,
+  "Name": "Outrider",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Barbarian",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 63,
+  "Name": "Saboteur",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Archer",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 64,
+  "Name": "Scourge",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Cleric",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 65,
+  "Name": "Warblade",
+  "Icon": "Yes",
+  "Tier": "14",
+  "Class 1": "Fighter",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 66,
+  "Name": "Brawler",
+  "Tier": "16",
+  "Class 1": "Fighter",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 67,
+  "Name": "Cartomancer",
+  "Icon": "Yes",
+  "Tier": "16",
+  "Class 1": "Bard",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 68,
+  "Name": "Conduit",
+  "Icon": "Yes",
+  "Tier": "16",
+  "Class 1": "Binder",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 69,
+  "Name": "Frightmaster",
+  "Tier": "16",
+  "Class 1": "Reaper",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 70,
+  "Name": "Justiciar",
+  "Icon": "Yes",
+  "Tier": "16",
+  "Class 1": "Archer",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 71,
+  "Name": "Outlaw",
+  "Icon": "Yes",
+  "Tier": "16",
+  "Class 1": "Barbarian",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 72,
+  "Name": "Shadow",
+  "Tier": "16",
+  "Class 1": "Rogue",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 73,
+  "Name": "Theurge",
+  "Tier": "16",
+  "Class 1": "Cleric",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 74,
+  "Name": "General",
+  "Icon": "Yes",
+  "Tier": "17",
+  "Class 1": "Binder",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 75,
+  "Name": "Hellion",
+  "Tier": "17",
+  "Class 1": "Monk",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 76,
+  "Name": "Martyr",
+  "Icon": "Yes",
+  "Tier": "17",
+  "Class 1": "Barbarian",
+  "Class 2": "Cleric"
+ },
+ {
+  "col": 77,
+  "Name": "Ronin",
+  "Tier": "17",
+  "Class 1": "Fighter",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 78,
+  "Name": "Songblade",
+  "Icon": "Yes",
+  "Tier": "17",
+  "Class 1": "Bard",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 79,
+  "Name": "Spirit Guide",
+  "Icon": "Yes",
+  "Tier": "17",
+  "Class 1": "Archer",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 80,
+  "Name": "Toxitician",
+  "Tier": "17",
+  "Class 1": "Psychic",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 81,
+  "Name": "Trapsmith",
+  "Tier": "17",
+  "Class 1": "Runemage",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 82,
+  "Name": "Deadeye",
+  "Icon": "Yes",
+  "Tier": "18",
+  "Class 1": "Archer",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 83,
+  "Name": "Charlatan",
+  "Tier": "18",
+  "Class 1": "Cleric",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 84,
+  "Name": "Dancer",
+  "Icon": "Yes",
+  "Tier": "18",
+  "Class 1": "Bard",
+  "Class 2": "Monk"
+ },
+ {
+  "col": 85,
+  "Name": "Enigma",
+  "Icon": "Yes",
+  "Tier": "18",
+  "Class 1": "Binder",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 86,
+  "Name": "Mindblade",
+  "Tier": "18",
+  "Class 1": "Psychic",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 87,
+  "Name": "Primalist",
+  "Icon": "Yes",
+  "Tier": "18",
+  "Class 1": "Barbarian",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 88,
+  "Name": "Rune Warrior",
+  "Tier": "18",
+  "Class 1": "Fighter",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 89,
+  "Name": "Warden",
+  "Tier": "18",
+  "Class 1": "Knight",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 90,
+  "Name": "Ancestral Blade",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Barbarian",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 91,
+  "Name": "Necrologist",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Binder",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 92,
+  "Name": "Sapper",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Archer",
+  "Class 2": "Teknixan"
+ },
+ {
+  "col": 93,
+  "Name": "Scholar",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Runemage",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 94,
+  "Name": "Songhealer",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Bard",
+  "Class 2": "Cleric"
+ },
+ {
+  "col": 95,
+  "Name": "Spellweaver",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Psychic",
+  "Class 2": "Spellweaver"
+ },
+ {
+  "col": 96,
+  "Name": "Weapon Master",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Fighter",
+  "Class 2": "Knight"
+ },
+ {
+  "col": 97,
+  "Name": "Wildcat",
+  "Icon": "Yes",
+  "Tier": "20",
+  "Class 1": "Monk",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 98,
+  "Name": "Arsenalist",
+  "Icon": "Yes",
+  "Tier": "22",
+  "Class 1": "Fighter",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 99,
+  "Name": "Blasphemer",
+  "Icon": "Yes",
+  "Tier": "22",
+  "Class 1": "Bard",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 100,
+  "Name": "Dreamstalker",
+  "Tier": "22",
+  "Class 1": "Psychic",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 101,
+  "Name": "Gothi",
+  "Tier": "22",
+  "Class 1": "Cleric",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 102,
+  "Name": "Hurler",
+  "Icon": "Yes",
+  "Tier": "22",
+  "Class 1": "Archer",
+  "Class 2": "Barbarian"
+ },
+ {
+  "col": 103,
+  "Name": "Kensai",
+  "Tier": "22",
+  "Class 1": "Monk",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 104,
+  "Name": "Liberator",
+  "Tier": "22",
+  "Class 1": "Knight",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 105,
+  "Name": "Sha'ir",
+  "Icon": "Yes",
+  "Tier": "22",
+  "Class 1": "Binder",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 106,
+  "Name": "Blind Archer",
+  "Icon": "Yes",
+  "Tier": "23",
+  "Class 1": "Archer",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 107,
+  "Name": "Ghostrider",
+  "Tier": "23",
+  "Class 1": "Knight",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 108,
+  "Name": "Grimalkin",
+  "Tier": "23",
+  "Class 1": "Rogue",
+  "Class 2": "Runemage"
+ },
+ {
+  "col": 109,
+  "Name": "Heretic",
+  "Tier": "23",
+  "Class 1": "Teknixian",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 110,
+  "Name": "Mystic",
+  "Icon": "Yes",
+  "Tier": "23",
+  "Class 1": "Binder",
+  "Class 2": "Spellsword"
+ },
+ {
+  "col": 111,
+  "Name": "Shifu",
+  "Icon": "Yes",
+  "Tier": "23",
+  "Class 1": "Monk",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 112,
+  "Name": "Skald",
+  "Icon": "Yes",
+  "Tier": "23",
+  "Class 1": "Barbarian",
+  "Class 2": "Bard"
+ },
+ {
+  "col": 113,
+  "Name": "Chaplain",
+  "Tier": "23",
+  "Class 1": "Cleric",
+  "Class 2": "Fighter"
+ },
+ {
+  "col": 114,
+  "Name": "Chameleon",
+  "Icon": "Yes",
+  "Tier": "24",
+  "Class 1": "Bard",
+  "Class 2": "Rogue"
+ },
+ {
+  "col": 115,
+  "Name": "Ghostfaced Killer",
+  "Tier": "24",
+  "Class 1": "Monk",
+  "Class 2": "Reaper"
+ },
+ {
+  "col": 116,
+  "Name": "Herbalist",
+  "Tier": "24",
+  "Class 1": "Cleric",
+  "Class 2": "Teknixian"
+ },
+ {
+  "col": 117,
+  "Name": "Rage Mage",
+  "Icon": "Yes",
+  "Tier": "24",
+  "Class 1": "Barbarian",
+  "Class 2": "Psychic"
+ },
+ {
+  "col": 118,
+  "Name": "Renegade",
+  "Tier": "24",
+  "Class 1": "Fighter",
+  "Class 2": "Witch"
+ },
+ {
+  "col": 119,
+  "Name": "Stargazer",
+  "Icon": "Yes",
+  "Tier": "24",
+  "Class 1": "Archer",
+  "Class 2": "Biinder"
+ },
+ {
+  "col": 120,
+  "Name": "Tactician",
+  "Icon": "Yes",
+  "Tier": "24",
+  "Class 1": "Knight",
+  "Class 2": "Wizard"
+ },
+ {
+  "col": 121,
+  "Name": "Valkyrie",
+  "Tier": "24",
+  "Class 1": "Runemage",
+  "Class 2": "Spellsword"
+ }
+]

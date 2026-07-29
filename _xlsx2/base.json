@@ -1,0 +1,68 @@
+[
+ {
+  "col": 1,
+  "Name": "Archer"
+ },
+ {
+  "col": 2,
+  "Name": "Barbarian"
+ },
+ {
+  "col": 3,
+  "Name": "Bard"
+ },
+ {
+  "col": 4,
+  "Name": "Binder",
+  "Weapon Name": "Whip",
+  "Weapon Mech": "companion quicken on turn"
+ },
+ {
+  "col": 5,
+  "Name": "Cleric"
+ },
+ {
+  "col": 6,
+  "Name": "Fighter"
+ },
+ {
+  "col": 7,
+  "Name": "Knight"
+ },
+ {
+  "col": 8,
+  "Name": "Monk"
+ },
+ {
+  "col": 9,
+  "Name": "Psychic"
+ },
+ {
+  "col": 10,
+  "Name": "Reaper"
+ },
+ {
+  "col": 11,
+  "Name": "Rogue"
+ },
+ {
+  "col": 12,
+  "Name": "Runemage"
+ },
+ {
+  "col": 13,
+  "Name": "Spellsword"
+ },
+ {
+  "col": 14,
+  "Name": "Teknixian"
+ },
+ {
+  "col": 15,
+  "Name": "Witch"
+ },
+ {
+  "col": 16,
+  "Name": "Wizard"
+ }
+]

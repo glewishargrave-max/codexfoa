@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scout — Character One-Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<meta name="ext-resource-dependency" content="icons/scout.png" data-resource-id="scout" />
+<meta name="ext-resource-dependency" content="images/scout-bg.jpg" data-resource-id="scoutBg" />
+
+<template id="__bundler_thumbnail" data-bg-color="#0a1310">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a1310"/>
+    <circle cx="600" cy="400" r="190" fill="none" stroke="#b8924a" stroke-width="6"/>
+    <circle cx="600" cy="400" r="150" fill="none" stroke="#6fbf7a" stroke-width="3" opacity="0.6"/>
+    <text x="600" y="470" font-family="Georgia, serif" font-size="200" font-weight="500" fill="#6fbf7a" text-anchor="middle">S</text>
+    <g fill="#e0b766">
+      <circle cx="600" cy="190" r="11"/><circle cx="600" cy="610" r="11"/>
+      <circle cx="390" cy="400" r="11"/><circle cx="810" cy="400" r="11"/>
+    </g>
+  </svg>
+</template>
+
+<style>
+  :root {
+    --bg: #0a1310;
+    --bg-glow: rgba(111,191,122,0.06);
+    --panel: #0e1a16;
+    --panel-2: #112019;
+    --bronze: #b8924a;
+    --bronze-bright: #e0b766;
+    --bronze-dim: #7a6234;
+    --emerald: #6fbf7a;
+    --text: #e8e0c8;
+    --text-dim: #a89e84;
+    --muted: #7a8b80;
+    --line: rgba(184,146,74,0.18);
+    --line-strong: rgba(184,146,74,0.42);
+    --acc: #6fbf7a;
+    /* rarity */
+    --rar-U: #e0b766; --rar-G: #9b7bd0; --rar-S: #6fbf7a; --rar-L: #8aa0b0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: "EB Garamond", Georgia, serif;
+    color: var(--text);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .scale-host { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #000; }
+  /* Outer plate holds the 1920×1080 sheet plus off-sheet annotations */
+  .plate { position: absolute; top: 0; left: 0; width: 3200px; height: 1660px; transform-origin: top left; }
+  .stage {
+    position: absolute; left: 640px; top: 300px;
+    width: 1920px; height: 1080px; z-index: 1;
+    background:
+      radial-gradient(ellipse 64% 46% at 50% 42%, var(--bg-glow), transparent 62%),
+      radial-gradient(ellipse 80% 60% at 50% 108%, rgba(184,146,74,0.05), transparent 60%),
+      var(--bg);
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(184,146,74,0.12), 0 50px 130px -40px rgba(0,0,0,0.92);
+  }
+  /* Annotation leader lines + margin notes */
+  .leaders { position: absolute; inset: 0; width: 3200px; height: 1660px; pointer-events: none; z-index: 3; overflow: visible; }
+  .annot { position: absolute; width: 560px; z-index: 4; }
+  .annot--l { text-align: right; }
+  .annot__rule { width: 46px; height: 1px; background: var(--line-strong); display: inline-block; margin-bottom: 14px; }
+  .annot__tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--emerald); margin-bottom: 9px; }
+  .annot__title { font-family: "Cinzel", serif; font-size: 25px; font-weight: 500; color: var(--text); letter-spacing: .02em; line-height: 1.16; margin-bottom: 12px; }
+  .annot__body { font-family: "EB Garamond", serif; font-size: 18px; line-height: 1.56; color: var(--text-dim); margin: 0; text-wrap: pretty; }
+  .annot__body b { color: var(--emerald); font-weight: 600; }
+  .annot__body--tight { font-size: 16px; line-height: 1.5; }
+  /* Compact stacked notes (bottom-left ability cluster) */
+  .annot--compact .annot__rule { margin-bottom: 7px; }
+  .annot--compact .annot__tag { margin-bottom: 4px; }
+  .annot--compact .annot__title { font-size: 19px; margin-bottom: 5px; line-height: 1.12; }
+  .annot--compact .annot__body { font-size: 14.5px; line-height: 1.42; }
+  /* Per-row glossary labels (right margin) */
+  .gloss { position: absolute; font-family: "EB Garamond", serif; font-size: 16.5px; line-height: 1.3; color: var(--text-dim); width: 500px; }
+  .gloss b { color: var(--emerald); font-weight: 600; }
+  /* faint vignette + map edge */
+  .stage::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    box-shadow: inset 0 0 240px 60px rgba(0,0,0,0.6);
+  }
+
+  .cnr { position: absolute; width: 13px; height: 13px; border: 1.5px solid var(--acc); opacity: .5; pointer-events: none; }
+  .cnr--tl { top: 9px; left: 9px; border-right: none; border-bottom: none; }
+  .cnr--tr { top: 9px; right: 9px; border-left: none; border-bottom: none; }
+  .cnr--bl { bottom: 9px; left: 9px; border-right: none; border-top: none; }
+  .cnr--br { bottom: 9px; right: 9px; border-left: none; border-top: none; }
+
+  /* outer document frame */
+  .frame { position: absolute; inset: 30px; border: 1px solid var(--line); pointer-events: none; }
+  .frame .cnr { --acc: var(--bronze); width: 26px; height: 26px; opacity: .8; }
+  .frame .cnr--tl { top: -1px; left: -1px; } .frame .cnr--tr { top: -1px; right: -1px; }
+  .frame .cnr--bl { bottom: -1px; left: -1px; } .frame .cnr--br { bottom: -1px; right: -1px; }
+
+  /* ── Top bar ─────────────────────────────────────────────────────────── */
+  .topbar {
+    position: absolute; top: 56px; left: 88px; right: 88px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar__meta { font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: .26em; text-transform: uppercase; color: var(--text-dim); }
+  .topbar__meta .b { color: var(--bronze-bright); }
+  .topbar__center { display: flex; align-items: center; gap: 16px; }
+  .topbar__rule { width: 64px; height: 1px; background: linear-gradient(to right, transparent, var(--line-strong)); }
+  .topbar__rule--r { background: linear-gradient(to left, transparent, var(--line-strong)); }
+  .topbar__word { font-family: "Cinzel", serif; font-size: 16px; font-weight: 600; letter-spacing: .42em; color: var(--emerald); text-shadow: 0 0 30px rgba(111,191,122,.3); }
+
+  /* ── Center identity ─────────────────────────────────────────────────── */
+  .identity {
+    position: absolute; left: 50%; top: 138px; transform: translateX(-50%);
+    width: 470px; text-align: center; z-index: 5;
+  }
+  .portrait { position: relative; width: 318px; height: 318px; margin: 0 auto; }
+  .portrait__ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--bronze); box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 0 60px -6px rgba(111,191,122,.4), inset 0 0 40px rgba(0,0,0,.7); }
+  .portrait__ring2 { position: absolute; inset: 14px; border-radius: 50%; border: 1px solid var(--line-strong); }
+  .portrait__img { position: absolute; inset: 18px; border-radius: 50%; overflow: hidden; background: #060a08; }
+  .portrait__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: saturate(.96) contrast(1.02); }
+  .portrait__gem { position: absolute; width: 16px; height: 16px; background: var(--bronze-bright); transform: rotate(45deg); border: 1px solid #060a08; box-shadow: 0 0 14px rgba(224,183,102,.7); }
+  .portrait__gem--n { top: -8px; left: 50%; margin-left: -8px; }
+  .portrait__gem--s { bottom: -8px; left: 50%; margin-left: -8px; }
+  .portrait__gem--w { left: -8px; top: 50%; margin-top: -8px; }
+  .portrait__gem--e { right: -8px; top: 50%; margin-top: -8px; }
+  /* crest seal */
+  .seal {
+    position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%);
+    width: 92px; height: 92px; border-radius: 50%; border: 2px solid var(--bronze);
+    background: radial-gradient(circle at 50% 40%, #0f1d16, #060a08);
+    box-shadow: 0 8px 26px rgba(0,0,0,.7); overflow: hidden;
+    display: flex; align-items: center; justify-content: center; z-index: 6;
+  }
+  .seal img { width: 112%; height: 112%; object-fit: contain; }
+
+  .id__breadcrumb { font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: .26em; text-transform: uppercase; color: var(--text-dim); margin: 52px 0 6px; }
+  .id__breadcrumb .sep { color: var(--bronze); margin: 0 8px; }
+  .id__breadcrumb .cur { color: var(--emerald); }
+  .id__name { font-family: "Cinzel", serif; font-weight: 500; font-size: 58px; line-height: .98; letter-spacing: .03em; color: var(--text); margin: 0; text-shadow: 0 0 50px rgba(111,191,122,.18); white-space: nowrap; }
+  .id__meta { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 15px 0 4px; font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  .id__meta .lbl { color: var(--muted); margin-right: 8px; }
+  .id__meta .v { color: var(--bronze-bright); }
+  .id__meta .dot { color: var(--bronze); font-size: 8px; transform: rotate(45deg); display: inline-block; }
+  .id__roles { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 16px 0 0; }
+  .roletag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 11px; border: 1px solid var(--line-strong); border-radius: 2px; color: var(--text-dim); }
+  .id__weapon {
+    margin: 18px auto 0; display: inline-flex; align-items: center; gap: 14px;
+    border: 1px solid var(--line); border-radius: 3px; padding: 9px 18px;
+    background: linear-gradient(180deg, rgba(184,146,74,.05), transparent);
+  }
+  .id__weapon dt { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .id__weapon dd { margin: 2px 0 0; font-family: "Cinzel", serif; font-size: 17px; color: var(--text); }
+  .id__weapon .div { width: 1px; height: 34px; background: var(--line-strong); }
+  .id__wpnbonus { margin: 13px auto 0; font-family: "EB Garamond", serif; font-style: italic; font-size: 15.5px; color: var(--emerald); display: inline-flex; align-items: center; gap: 10px; }
+  .id__wpnbonus .gem { color: var(--bronze-bright); font-size: 10px; transform: rotate(45deg); display: inline-block; }
+
+  /* ── Signature mechanic (bottom-center) ──────────────────────────────── */
+  .mechrow {
+    position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%);
+    width: 576px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; z-index: 5;
+  }
+  .mech {
+    border: 1px solid color-mix(in srgb, var(--acc) 34%, transparent); border-radius: 4px;
+    background: color-mix(in srgb, var(--acc) 6%, transparent);
+    padding: 14px 18px 16px; text-align: center;
+  }
+  .mech__label { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc); }
+  .mech__name { font-family: "Cinzel", serif; font-size: 21px; font-weight: 500; color: var(--text); margin: 6px 0 8px; letter-spacing: .03em; }
+  .mech__text { font-family: "EB Garamond", serif; font-size: 14.5px; line-height: 1.42; color: var(--text-dim); margin: 0; font-style: italic; text-wrap: pretty; }
+
+  /* ── Quadrant panels ─────────────────────────────────────────────────── */
+  .quad {
+    position: absolute; width: 600px; height: 436px; z-index: 4;
+    border: 1px solid var(--line); border-radius: 5px;
+    background: linear-gradient(180deg, rgba(14,26,22,.92), rgba(10,16,13,.86));
+    backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+    box-shadow: 0 24px 60px -30px rgba(0,0,0,.9);
+    padding: 22px 26px;
+    display: flex; flex-direction: column;
+  }
+  .quad--tl { top: 126px; left: 64px; }
+  .quad--tr { top: 126px; right: 64px; }
+  .quad--bl { bottom: 50px; left: 64px; }
+  .quad--br { bottom: 50px; right: 64px; }
+
+  .quad__head { display: flex; align-items: center; gap: 14px; padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .quad__numeral { font-family: "Cinzel", serif; font-size: 30px; font-weight: 600; color: color-mix(in srgb, var(--acc) 64%, var(--muted)); line-height: 1; flex: none; min-width: 30px; }
+  .quad__titles { flex: 1; min-width: 0; }
+  .quad__label { font-family: "Cinzel", serif; font-size: 22px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text); line-height: 1; }
+  .quad__sub { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+  .quad__count { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .1em; color: var(--acc); border: 1px solid color-mix(in srgb, var(--acc) 40%, transparent); border-radius: 2px; padding: 4px 9px; flex: none; }
+  .quad__body { flex: 1; min-height: 0; }
+
+  /* Statistics — numeric mini-table */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .statrow { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 10px; padding: 6px 2px; border-bottom: 1px solid var(--line); }
+  .statrow__abbr { font-family: "Cinzel", serif; font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: .04em; }
+  .statrow__base { font-family: "JetBrains Mono", monospace; font-size: 19px; color: var(--emerald); justify-self: end; }
+  .stats__legend { grid-column: 1 / -1; display: flex; justify-content: space-between; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding: 0 2px 8px; }
+  /* Combat — derived base values */
+  .combat { margin-top: 12px; }
+  .combat__head { display: flex; align-items: center; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .combat__head .rule { flex: 1; height: 1px; background: var(--line); }
+  .combat__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .combatcell { border: 1px solid var(--line); border-radius: 3px; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(180deg, rgba(184,146,74,.05), transparent); }
+  .combatcell__abbr { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .combatcell__val { font-family: "Cinzel", serif; font-size: 20px; font-weight: 500; color: var(--bronze-bright); line-height: 1; }
+
+  /* Passives */
+  .passlist { display: flex; flex-direction: column; gap: 0; }
+  .passrow { display: flex; align-items: center; gap: 13px; padding: 13px 2px; border-bottom: 1px solid var(--line); }
+  .passrow__dot { width: 22px; height: 22px; flex: none; border-radius: 50%; border: 1px solid; display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: 10px; }
+  .passrow__name { flex: 1; font-family: "Cinzel", serif; font-size: 17px; color: var(--text); letter-spacing: .02em; }
+  .passrow__kind { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .passmore { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .1em; color: var(--muted); padding: 11px 2px 0; font-style: normal; }
+
+  /* Abilities */
+  .ab__counts { display: flex; gap: 8px; margin-bottom: 18px; }
+  .ab__count { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .08em; color: var(--text-dim); border: 1px solid var(--line); border-radius: 2px; padding: 4px 10px; }
+  .ab__count b { color: var(--emerald); font-weight: 500; }
+  .ablist { display: flex; flex-direction: column; gap: 15px; }
+  .abrow { display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+  .abrow__name { flex: 1; font-family: "EB Garamond", serif; font-size: 17.5px; color: var(--text); white-space: nowrap; }
+  .abrow__flag { font-family: "JetBrains Mono", monospace; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); border: 1px solid color-mix(in srgb, var(--acc) 45%, transparent); border-radius: 2px; padding: 2px 7px; background: color-mix(in srgb, var(--acc) 8%, transparent); }
+  .abstr { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid; border-radius: 2px; padding: 2px 8px; min-width: 54px; text-align: center; }
+  .abstr--major { color: var(--emerald); border-color: color-mix(in srgb, var(--emerald) 50%, transparent); background: color-mix(in srgb, var(--emerald) 8%, transparent); }
+  .abstr--move { color: var(--bronze-bright); border-color: color-mix(in srgb, var(--bronze) 50%, transparent); background: color-mix(in srgb, var(--bronze) 8%, transparent); }
+  .abstr--minor { color: var(--muted); border-color: var(--line-strong); }
+
+  /* Skills */
+  .skilltrees { display: flex; flex-direction: column; gap: 13px; }
+  .stree { }
+  .stree__group { display: flex; align-items: baseline; gap: 10px; margin-bottom: 5px; }
+  .stree__name { font-family: "Cinzel", serif; font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); white-space: nowrap; }
+  .stree__rule { flex: 1; height: 1px; background: var(--line); }
+  .stree__skills { font-family: "EB Garamond", serif; font-size: 15.5px; color: var(--text-dim); line-height: 1.4; }
+  .stree__skills .sk { color: var(--text); }
+  .stree__skills .dot { color: var(--bronze); margin: 0 7px; }
+  .stree__skills .skdesc { color: var(--muted); font-style: italic; font-size: 13.5px; }
+  /* Capstone skill */
+  .skcap { margin-top: 16px; border: 1px solid color-mix(in srgb, var(--acc) 42%, transparent); border-radius: 4px; background: color-mix(in srgb, var(--acc) 7%, transparent); padding: 14px 17px; }
+  .skcap__head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .skcap__name { font-family: "Cinzel", serif; font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: .02em; }
+  .skcap__tag { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); border: 1px solid color-mix(in srgb, var(--acc) 42%, transparent); border-radius: 2px; padding: 3px 9px; }
+  .skcap__text { font-family: "EB Garamond", serif; font-size: 16px; line-height: 1.48; color: var(--text-dim); margin: 0; text-wrap: pretty; }
+
+  /* footer */
+  .footer {
+    position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%);
+    font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+  <div class="scale-host">
+    <div class="plate" id="plate">
+
+      <!-- Off-sheet annotation leader lines -->
+      <svg class="leaders" viewBox="0 0 3200 1660" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <line x1="600" y1="525" x2="704" y2="582" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="600" cy="525" r="3.5" fill="#b8924a"/>
+        <circle cx="704" cy="582" r="5" fill="#6fbf7a"/>
+        <circle cx="704" cy="582" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <line x1="600" y1="758" x2="704" y2="730" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="600" cy="758" r="3.5" fill="#b8924a"/>
+        <circle cx="704" cy="730" r="5" fill="#6fbf7a"/>
+        <circle cx="704" cy="730" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <line x1="600" y1="1010" x2="734" y2="998" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="600" cy="1010" r="3.5" fill="#b8924a"/>
+        <circle cx="734" cy="998" r="5" fill="#6fbf7a"/>
+        <circle cx="734" cy="998" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <polyline points="1330,250 1400,250 1400,816 1528,816" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1330" cy="250" r="3.5" fill="#b8924a"/>
+        <circle cx="1528" cy="816" r="5" fill="#6fbf7a"/>
+        <circle cx="1528" cy="816" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <polyline points="1870,250 1800,250 1800,816 1672,816" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1870" cy="250" r="3.5" fill="#b8924a"/>
+        <circle cx="1672" cy="816" r="5" fill="#6fbf7a"/>
+        <circle cx="1672" cy="816" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <line x1="2496" y1="458" x2="2585" y2="458" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="458" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="458" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="458" r="3.5" fill="#b8924a"/>
+        <line x1="2496" y1="544" x2="2600" y2="544" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="544" r="4" fill="#6fbf7a"/>
+        <line x1="2496" y1="592" x2="2560" y2="592" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <line x1="2496" y1="640" x2="2560" y2="640" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <line x1="2560" y1="592" x2="2560" y2="640" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <line x1="2560" y1="616" x2="2600" y2="616" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="592" r="4" fill="#6fbf7a"/>
+        <circle cx="2496" cy="640" r="4" fill="#6fbf7a"/>
+        <line x1="2496" y1="688" x2="2600" y2="688" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="688" r="4" fill="#6fbf7a"/>
+        <line x1="2496" y1="736" x2="2600" y2="736" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="736" r="4" fill="#6fbf7a"/>
+        <line x1="2496" y1="784" x2="2600" y2="784" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="784" r="4" fill="#6fbf7a"/>
+        <line x1="1340" y1="1432" x2="1452" y2="1322" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1340" cy="1432" r="3.5" fill="#b8924a"/>
+        <circle cx="1452" cy="1322" r="5" fill="#6fbf7a"/>
+        <circle cx="1452" cy="1322" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <line x1="1860" y1="1432" x2="1747" y2="1322" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1860" cy="1432" r="3.5" fill="#b8924a"/>
+        <circle cx="1747" cy="1322" r="5" fill="#6fbf7a"/>
+        <circle cx="1747" cy="1322" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Roster annotation (top-center → character portrait) -->
+        <line x1="1600" y1="172" x2="1600" y2="422" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1600" cy="172" r="3.5" fill="#b8924a"/>
+        <circle cx="1600" cy="422" r="5" fill="#6fbf7a"/>
+        <circle cx="1600" cy="422" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Weapon annotation (straight line down → weapon block, threads between mechanic cards) -->
+        <line x1="1600" y1="1080" x2="1600" y2="1396" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1600" cy="1080" r="5" fill="#6fbf7a"/>
+        <circle cx="1600" cy="1080" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="1600" cy="1396" r="3.5" fill="#b8924a"/>
+        <!-- Skill-tree annotations (right margin → each group + capstone) -->
+        <line x1="2496" y1="1007" x2="2585" y2="921" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="1007" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="1007" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="921" r="3.5" fill="#b8924a"/>
+        <line x1="2496" y1="1066" x2="2585" y2="1044" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="1066" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="1066" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="1044" r="3.5" fill="#b8924a"/>
+        <line x1="2496" y1="1124" x2="2585" y2="1170" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="1124" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="1124" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="1170" r="3.5" fill="#b8924a"/>
+        <line x1="2496" y1="1183" x2="2585" y2="1294" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="1183" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="1183" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="1294" r="3.5" fill="#b8924a"/>
+        <line x1="2496" y1="1278" x2="2585" y2="1416" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="2496" cy="1278" r="5" fill="#6fbf7a"/>
+        <circle cx="2496" cy="1278" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <circle cx="2585" cy="1416" r="3.5" fill="#b8924a"/>
+        <!-- Mana stat annotation (top-left · routes down channel into Mana cell from below) -->
+        <polyline points="580,260 665,260 665,872 1004,872 1004,836" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="580" cy="260" r="3.5" fill="#b8924a"/>
+        <circle cx="1004" cy="836" r="5" fill="#6fbf7a"/>
+        <circle cx="1004" cy="836" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Level annotation (top · routes down center-column left gutter into Level value) -->
+        <polyline points="1292,300 1360,300 1360,911 1490,911" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1292" cy="300" r="3.5" fill="#b8924a"/>
+        <circle cx="1490" cy="911" r="5" fill="#6fbf7a"/>
+        <circle cx="1490" cy="911" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Talent annotation (top · routes down center-column right gutter into Talent value) -->
+        <polyline points="1908,300 1876,300 1876,911 1710,911" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="1908" cy="300" r="3.5" fill="#b8924a"/>
+        <circle cx="1710" cy="911" r="5" fill="#6fbf7a"/>
+        <circle cx="1710" cy="911" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Speed stat annotation (left gutter · approaches cell from below) -->
+        <polyline points="580,1138 665,1138 665,955 1188,955 1188,838" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="580" cy="1138" r="3.5" fill="#b8924a"/>
+        <circle cx="1188" cy="838" r="5" fill="#6fbf7a"/>
+        <circle cx="1188" cy="838" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Adroit Momentum annotation (bottom-left stack) -->
+        <polyline points="580,1414 690,1414 690,1037 731,1037" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="580" cy="1414" r="3.5" fill="#b8924a"/>
+        <circle cx="731" cy="1037" r="5" fill="#6fbf7a"/>
+        <circle cx="731" cy="1037" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Flanking Shot annotation (bottom-left stack) -->
+        <polyline points="580,1500 705,1500 705,1075 731,1075" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="580" cy="1500" r="3.5" fill="#b8924a"/>
+        <circle cx="731" cy="1075" r="5" fill="#6fbf7a"/>
+        <circle cx="731" cy="1075" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+        <!-- Speed Screen annotation (bottom-left stack) -->
+        <polyline points="580,1594 718,1594 718,1189 731,1189" fill="none" stroke="rgba(184,146,74,0.5)" stroke-width="1.5"/>
+        <circle cx="580" cy="1594" r="3.5" fill="#b8924a"/>
+        <circle cx="731" cy="1189" r="5" fill="#6fbf7a"/>
+        <circle cx="731" cy="1189" r="9.5" fill="none" stroke="rgba(111,191,122,0.4)" stroke-width="1.5"/>
+      </svg>
+
+      <!-- Base class annotation (top · points to breadcrumb Archer) -->
+      <div class="annot annot--l" style="left:806px; top:34px; width:524px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Identity · Base Class</div>
+        <div class="annot__title">Sixteen base classes</div>
+        <p class="annot__body annot__body--tight">Every character is built on a <b>base class</b> that sets their key mechanic. The sixteen: Archer, Barbarian, Bard, Binder, Cleric, Fighter, Knight, Monk, Psychic, Reaper, Rogue, Runemage, Spellsword, Teknixian, Witch, Wizard.</p>
+      </div>
+
+      <!-- Subclass annotation (top · points to breadcrumb Scout) -->
+      <div class="annot" style="left:1870px; top:34px; width:524px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Identity · Subclass</div>
+        <div class="annot__title">Ten subclasses, fifteen duals</div>
+        <p class="annot__body annot__body--tight">Each base class branches into <b>10 subclasses</b> — like the Scout — each specializing in a different area, plus <b>15 dual classes</b> that fuse it with another base class.</p>
+      </div>
+
+      <!-- Statistics annotations (left margin) -->
+      <div class="annot annot--l" style="left:40px; top:455px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Statistics · Attributes</div>
+        <div class="annot__title">Attributes drive everything</div>
+        <p class="annot__body">Each of the eight attributes feeds a set of base stats — and sets the thresholds a character must meet to unlock <b>passives</b>, <b>skills</b>, and <b>abilities</b>. For Archers, <b>Dexterity</b> is the primary attribute, and the one that governs damage.</p>
+      </div>
+
+      <div class="annot annot--l" style="left:40px; top:696px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Statistics · Damage</div>
+        <div class="annot__title">Damage by action type</div>
+        <p class="annot__body">Every action draws on a different damage value — <b>ranged</b>, <b>melee</b>, or <b>magic</b> — depending on how it is delivered. Samson is specialized in <b>ranged</b>, so his ranged value leads.</p>
+      </div>
+
+      <!-- Abilities annotation (left margin, lower) -->
+      <div class="annot annot--l" style="left:40px; top:930px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Abilities · Action System</div>
+        <div class="annot__title">Three actions, three power levels</div>
+        <p class="annot__body">Every ability carries a power level — <b>Major</b>, <b>Move</b>, or <b>Minor</b>. On each turn a character spends three actions, one of every level: a Major, a Move, and a Minor.</p>
+      </div>
+
+      <!-- Passives overview (right margin) -->
+      <div class="annot" style="left:2585px; top:382px; width:548px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Passives · Overview</div>
+        <div class="annot__title">Always-on, tiered</div>
+        <p class="annot__body annot__body--tight">Always-on bonuses that taper with diminishing returns — but each pays out more at higher tiers.</p>
+      </div>
+
+      <div class="gloss" style="left:2615px; top:532px;">Acts <b>sooner</b> in battle.</div>
+      <div class="gloss" style="left:2615px; top:604px;">Raise the unit's stats until its <b>first turn</b> ends.</div>
+      <div class="gloss" style="left:2615px; top:676px;">Amplifies every <b>momentum</b> modifier.</div>
+      <div class="gloss" style="left:2615px; top:724px;">Raises the chance <b>ranged</b> attacks hit.</div>
+      <div class="gloss" style="left:2615px; top:772px;">Strengthens <b>quicken</b> effects on the timer.</div>
+
+      <!-- Aim mechanic annotation (bottom margin) -->
+      <div class="annot annot--l" style="left:820px; top:1402px; width:520px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Mechanic · Aim</div>
+        <div class="annot__title">Aim sharpens every shot</div>
+        <p class="annot__body annot__body--tight">The Archer's key mechanic. Every attack that lands improves Samson — scaled to that attack's <b>accuracy</b>. Abilities can <b>require</b>, <b>consume</b>, or <b>generate</b> aim.</p>
+      </div>
+
+      <!-- Scouted Abilities annotation (bottom margin) -->
+      <div class="annot" style="left:1860px; top:1402px; width:520px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Mechanic · Scouted Abilities</div>
+        <div class="annot__title">A signature per subclass</div>
+        <p class="annot__body annot__body--tight">Each subclass has its own signature mechanic. The Scout's scouted abilities are stronger on the <b>first turn</b> of a combat wave.</p>
+      </div>
+
+      <!-- Roster annotation (top-center · points to character portrait) -->
+      <div class="annot" style="left:1340px; top:34px; width:520px; text-align:center;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Identity · Roster</div>
+        <div class="annot__title">A roster of sixteen, four to a battle</div>
+        <p class="annot__body annot__body--tight">You command <b>sixteen</b> characters in all, fielding <b>four</b> of them in any given battle. Each is bound to one of the base classes — Samson to the <b>Archer</b>.</p>
+      </div>
+
+      <!-- Weapon annotation (bottom-center · straight line up to weapon block) -->
+      <div class="annot" style="left:1370px; top:1402px; width:460px; text-align:center;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Identity · Weapon</div>
+        <div class="annot__title">A weapon to each class</div>
+        <p class="annot__body annot__body--tight">Every class is paired with a signature weapon — its own stats and its own function in a fight. The Scout draws the <b>Short Bow</b>.</p>
+      </div>
+
+      <!-- Skill-tree annotations (right margin · one per group + capstone) -->
+      <div class="annot annot--compact" style="left:2585px; top:860px; width:510px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Skills · Class Skills</div>
+        <div class="annot__title">The Archer's own</div>
+        <p class="annot__body annot__body--tight">Belong to the Archer line alone. <b>Preliminary Action</b> (Damage All) strikes every enemy before battle; <b>Aim Amount</b> (First Attack) builds extra aim on the opening attack.</p>
+      </div>
+
+      <div class="annot annot--compact" style="left:2585px; top:997px; width:510px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Skills · Parent</div>
+        <div class="annot__title">Conditioned on momentum</div>
+        <p class="annot__body annot__body--tight">The <b>Momentum</b> parent adds an extra effect when the unit <b>starts its turn with momentum</b>.</p>
+      </div>
+
+      <div class="annot annot--compact" style="left:2585px; top:1117px; width:510px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Skills · Effects</div>
+        <div class="annot__title">Momentum-fed stat boosts</div>
+        <p class="annot__body annot__body--tight"><b>Enhance Accuracy</b> and <b>Enhance Dodge</b>, attached to momentum, grant enhanced stats when the unit starts with enough momentum.</p>
+      </div>
+
+      <div class="annot annot--compact" style="left:2585px; top:1241px; width:510px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Skills · Modifiers</div>
+        <div class="annot__title">Tune the attached skill</div>
+        <p class="annot__body annot__body--tight"><b>Enhance</b> modifiers raise the effect of the skills they attach to; <b>Threshold</b> modifiers lower the momentum needed to trigger them.</p>
+      </div>
+
+      <div class="annot annot--compact" style="left:2585px; top:1363px; width:510px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Passive · Capstone</div>
+        <div class="annot__title">Every class has one</div>
+        <p class="annot__body annot__body--tight">A capstone passive any character can equip — improving or granting passive abilities like those the class expresses.</p>
+      </div>
+
+      <!-- Mana stat annotation (top-left · points into Mana cell) -->
+      <div class="annot annot--l" style="left:40px; top:200px; width:540px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Statistics · Mana</div>
+        <div class="annot__title">A resource that builds</div>
+        <p class="annot__body annot__body--tight">Shared by every character. <b>Mana</b> starts each battle near zero and accumulates over time, opening up more powerful abilities.</p>
+      </div>
+
+      <!-- Level annotation (top · points to Level value) -->
+      <div class="annot annot--l" style="left:822px; top:232px; width:470px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Progression · Level</div>
+        <div class="annot__title">Level sets the baseline</div>
+        <p class="annot__body annot__body--tight"><b>Level</b> rises with Talent and fixes a unit's general stats — base damage, health, defense, and resistance — before <b>passives</b> and <b>attributes</b> modify them further.</p>
+      </div>
+
+      <!-- Talent annotation (top · points to Talent value) -->
+      <div class="annot" style="left:1908px; top:232px; width:470px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Progression · Talent</div>
+        <div class="annot__title">Earned in battle, spent freely</div>
+        <p class="annot__body annot__body--tight"><b>Talent</b> is the experience won from battle, spent to develop any of the four facets. <b>Passives</b>, <b>Abilities</b>, and <b>Skills</b> — and new classes — each also need a <b>training manual</b> to purchase.</p>
+      </div>
+
+      <!-- Speed stat annotation (left gutter · points up to Speed cell) -->
+      <div class="annot annot--l" style="left:40px; top:1078px; width:540px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Statistics · Speed</div>
+        <div class="annot__title">Speed sets the tempo</div>
+        <p class="annot__body annot__body--tight">In the count-to-battle system, <b>Speed</b> governs how quickly — and how often — a unit gets to act.</p>
+      </div>
+
+      <!-- Adroit Momentum annotation (bottom-left stack) -->
+      <div class="annot annot--l annot--compact" style="left:40px; top:1374px; width:540px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Ability · Adroit Momentum</div>
+        <div class="annot__title">Accuracy and momentum, stacked</div>
+        <p class="annot__body annot__body--tight">A <b>pinpoint</b> modifier scales damage by accuracy; a <b>momentum</b> modifier, by excess timer count.</p>
+      </div>
+
+      <!-- Flanking Shot annotation (bottom-left stack) -->
+      <div class="annot annot--l annot--compact" style="left:40px; top:1466px; width:540px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Ability · Flanking Shot</div>
+        <div class="annot__title">Opens a target up</div>
+        <p class="annot__body annot__body--tight">Inflicts <b>flanked</b> — lowering dodge and raising the damage <b>rogues</b> deal.</p>
+      </div>
+
+      <!-- Speed Screen annotation (bottom-left stack) -->
+      <div class="annot annot--l annot--compact" style="left:40px; top:1558px; width:540px;">
+        <span class="annot__rule"></span>
+        <div class="annot__tag">Ability · Screens</div>
+        <div class="annot__title">A closing move</div>
+        <p class="annot__body annot__body--tight">Common to archers; used <b>last</b> in the turn to generate aim and grant buffs like <b>damage shield</b>.</p>
+      </div>
+
+    <div class="stage" id="stage" data-screen-label="Scout One-Sheet">
+
+      <div class="frame">
+        <span class="cnr cnr--tl"></span><span class="cnr cnr--tr"></span>
+        <span class="cnr cnr--bl"></span><span class="cnr cnr--br"></span>
+      </div>
+
+      <!-- Top bar -->
+      <div class="topbar">
+        <div class="topbar__meta">Class Line · <span class="b">Archer</span></div>
+        <div class="topbar__center">
+          <span class="topbar__rule"></span>
+          <span class="topbar__word">The Character Codex</span>
+          <span class="topbar__rule topbar__rule--r"></span>
+        </div>
+        <div class="topbar__meta">Tier <span class="b">I</span> · Code 2</div>
+      </div>
+
+      <!-- Center identity -->
+      <div class="identity">
+        <div class="portrait">
+          <div class="portrait__img"><img src="images/scout-bg.jpg" alt="Scout portrait" /></div>
+          <div class="portrait__ring"></div>
+          <div class="portrait__ring2"></div>
+          <span class="portrait__gem portrait__gem--n"></span>
+          <span class="portrait__gem portrait__gem--s"></span>
+          <span class="portrait__gem portrait__gem--w"></span>
+          <span class="portrait__gem portrait__gem--e"></span>
+          <div class="seal"><img src="icons/scout.png" alt="Archer crest" /></div>
+        </div>
+        <div class="id__breadcrumb">Archer <span class="sep">›</span> <span class="cur">Scout</span></div>
+        <h1 class="id__name">Samson Graves</h1>
+        <div class="id__meta">
+          <span><span class="lbl">Level</span><span class="v">24</span></span>
+          <span class="dot">◆</span>
+          <span><span class="lbl">Talent</span><span class="v">1,240</span></span>
+        </div>
+        <div class="id__roles">
+          <span class="roletag">Opener</span>
+          <span class="roletag">Tempo</span>
+          <span class="roletag">Battlefield Control</span>
+          <span class="roletag">Ranged</span>
+        </div>
+        <dl class="id__weapon">
+          <div><dt>Weapon</dt><dd>Short Bow</dd></div>
+          <span class="div"></span>
+          <div><dt>Armor</dt><dd>Scout Leathers</dd></div>
+        </dl>
+        <div class="id__wpnbonus"><span class="gem">◆</span>Short Bow grants an initiative bonus — acts sooner in the first round.</div>
+      </div>
+
+      <!-- Class + subclass mechanics -->
+      <div class="mechrow">
+        <div class="mech">
+          <div class="mech__label">Class Mechanic · Archer</div>
+          <div class="mech__name">Aim</div>
+          <p class="mech__text">Builds as Samson acts, then is spent to sharpen accuracy and add damage to his shots.</p>
+        </div>
+        <div class="mech">
+          <div class="mech__label">Subclass Mechanic · Scout</div>
+          <div class="mech__name">Scouted Abilities</div>
+          <p class="mech__text">Strongest on the very first action of battle, then downgrade for the rest of the fight.</p>
+        </div>
+      </div>
+
+      <!-- I · Statistics (top-left) -->
+      <section class="quad quad--tl">
+        <span class="cnr cnr--tl"></span><span class="cnr cnr--tr"></span>
+        <span class="cnr cnr--bl"></span><span class="cnr cnr--br"></span>
+        <div class="quad__head">
+          <div class="quad__numeral">I</div>
+          <div class="quad__titles">
+            <div class="quad__label">Statistics</div>
+            <div class="quad__sub">Attributes &amp; base combat values</div>
+          </div>
+          <div class="quad__count">8 + 6</div>
+        </div>
+        <div class="quad__body">
+          <div class="stats">
+            <div class="stats__legend"><span>Attribute</span><span>Value</span></div>
+            <div class="statrow"><span class="statrow__abbr">STR</span><span class="statrow__base">54</span></div>
+            <div class="statrow"><span class="statrow__abbr">END</span><span class="statrow__base">53</span></div>
+            <div class="statrow"><span class="statrow__abbr">DEX</span><span class="statrow__base">60</span></div>
+            <div class="statrow"><span class="statrow__abbr">WIL</span><span class="statrow__base">54</span></div>
+            <div class="statrow"><span class="statrow__abbr">INT</span><span class="statrow__base">50</span></div>
+            <div class="statrow"><span class="statrow__abbr">CHA</span><span class="statrow__base">58</span></div>
+            <div class="statrow"><span class="statrow__abbr">WIS</span><span class="statrow__base">61</span></div>
+            <div class="statrow"><span class="statrow__abbr">LUC</span><span class="statrow__base">53</span></div>
+          </div>
+          <div class="combat">
+            <div class="combat__head">Combat · Base<span class="rule"></span></div>
+            <div class="combat__grid">
+              <div class="combatcell"><span class="combatcell__abbr">Ranged Dmg</span><span class="combatcell__val">58</span></div>
+              <div class="combatcell"><span class="combatcell__abbr">Melee Dmg</span><span class="combatcell__val">31</span></div>
+              <div class="combatcell"><span class="combatcell__abbr">Magic Dmg</span><span class="combatcell__val">12</span></div>
+              <div class="combatcell"><span class="combatcell__abbr">Health</span><span class="combatcell__val">462</span></div>
+              <div class="combatcell"><span class="combatcell__abbr">Mana</span><span class="combatcell__val">210</span></div>
+              <div class="combatcell"><span class="combatcell__abbr">Speed</span><span class="combatcell__val">22</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- II · Passives (top-right) -->
+      <section class="quad quad--tr">
+        <span class="cnr cnr--tl"></span><span class="cnr cnr--tr"></span>
+        <span class="cnr cnr--bl"></span><span class="cnr cnr--br"></span>
+        <div class="quad__head">
+          <div class="quad__numeral">II</div>
+          <div class="quad__titles">
+            <div class="quad__label">Passives</div>
+            <div class="quad__sub">Always-on bonuses, ranked by rarity</div>
+          </div>
+          <div class="quad__count">13 total</div>
+        </div>
+        <div class="quad__body">
+          <div class="passlist">
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-U);color:var(--rar-U)">U</span><span class="passrow__name">Initiative</span><span class="passrow__kind">Ultimate</span></div>
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-G);color:var(--rar-G)">G</span><span class="passrow__name">Initial Damage</span><span class="passrow__kind">Greater</span></div>
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-G);color:var(--rar-G)">G</span><span class="passrow__name">Initial Defense</span><span class="passrow__kind">Greater</span></div>
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-S);color:var(--rar-S)">S</span><span class="passrow__name">Momentum</span><span class="passrow__kind">Standard</span></div>
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-S);color:var(--rar-S)">S</span><span class="passrow__name">Ranged Accuracy</span><span class="passrow__kind">Standard</span></div>
+            <div class="passrow"><span class="passrow__dot" style="border-color:var(--rar-S);color:var(--rar-S)">S</span><span class="passrow__name">Quickens</span><span class="passrow__kind">Standard</span></div>
+            <div class="passmore">+ 7 more — Initial Dodge · Damage vs Flanked · Speed · Charm Mastery …</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- III · Abilities (bottom-left) -->
+      <section class="quad quad--bl">
+        <span class="cnr cnr--tl"></span><span class="cnr cnr--tr"></span>
+        <span class="cnr cnr--bl"></span><span class="cnr cnr--br"></span>
+        <div class="quad__head">
+          <div class="quad__numeral">III</div>
+          <div class="quad__titles">
+            <div class="quad__label">Abilities</div>
+            <div class="quad__sub">Active moves used in combat</div>
+          </div>
+          <div class="quad__count">25 total</div>
+        </div>
+        <div class="quad__body">
+          <div class="ab__counts">
+            <span class="ab__count"><b>14</b> Major</span>
+            <span class="ab__count"><b>6</b> Move</span>
+            <span class="ab__count"><b>5</b> Minor</span>
+          </div>
+          <div class="ablist">
+            <div class="abrow"><span class="abrow__name">Adroit Momentum</span><span class="abstr abstr--major">Major</span></div>
+            <div class="abrow"><span class="abrow__name">Flanking Shot</span><span class="abstr abstr--major">Major</span></div>
+            <div class="abrow"><span class="abrow__name">Scouted Arrow Burst</span><span class="abrow__flag">Scouted</span><span class="abstr abstr--major">Major</span></div>
+            <div class="abrow"><span class="abrow__name">Danger Warning</span><span class="abstr abstr--move">Move</span></div>
+            <div class="abrow"><span class="abrow__name">Speed Screen</span><span class="abstr abstr--move">Move</span></div>
+            <div class="abrow"><span class="abrow__name">Momentous Initiative</span><span class="abstr abstr--minor">Minor</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IV · Skills (bottom-right) -->
+      <section class="quad quad--br">
+        <span class="cnr cnr--tl"></span><span class="cnr cnr--tr"></span>
+        <span class="cnr cnr--bl"></span><span class="cnr cnr--br"></span>
+        <div class="quad__head">
+          <div class="quad__numeral">IV</div>
+          <div class="quad__titles">
+            <div class="quad__label">Skills</div>
+            <div class="quad__sub">Passive trees unlocked across levels</div>
+          </div>
+          <div class="quad__count">4 trees · capstone</div>
+        </div>
+        <div class="quad__body">
+          <div class="skilltrees">
+            <div class="stree">
+              <div class="stree__group"><span class="stree__name">Class Skills</span><span class="stree__rule"></span></div>
+              <div class="stree__skills"><span class="sk">Preliminary Action <span class="skdesc">(Damage All)</span></span><span class="dot">·</span><span class="sk">Aim Amount <span class="skdesc">(First Attack)</span></span></div>
+            </div>
+            <div class="stree">
+              <div class="stree__group"><span class="stree__name">Parent Skills</span><span class="stree__rule"></span></div>
+              <div class="stree__skills"><span class="sk">Momentum</span><span class="dot">·</span><span class="sk">Initial Effect</span><span class="dot">·</span><span class="sk">Full Team</span></div>
+            </div>
+            <div class="stree">
+              <div class="stree__group"><span class="stree__name">Effect Skills</span><span class="stree__rule"></span></div>
+              <div class="stree__skills"><span class="sk">Enhance Accuracy</span><span class="dot">·</span><span class="sk">Enhance Dodge</span><span class="dot">·</span><span class="sk">Countdown</span><span class="dot">·</span><span class="sk">Weaken Accuracy</span></div>
+            </div>
+            <div class="stree">
+              <div class="stree__group"><span class="stree__name">Modifier Skills</span><span class="stree__rule"></span></div>
+              <div class="stree__skills"><span class="sk">Enchantment α</span><span class="dot">·</span><span class="sk">Weakness α/β</span><span class="dot">·</span><span class="sk">Enhance α/β</span><span class="dot">·</span><span class="sk">Threshold α</span></div>
+            </div>
+          </div>
+          <div class="skcap">
+            <div class="skcap__head"><span class="skcap__name">New Beginning</span><span class="skcap__tag">Capstone · Momentum Modifier</span></div>
+            <p class="skcap__text">If momentum is high enough, gain initial bonuses on the turn — including the ability to use Scouted abilities again.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">Scout · Archer's First Ascension · Concord Battlefield Codex</div>
+
+    </div>
+    </div>
+  </div>
+
+  <script>
+    function fitStage() {
+      const plate = document.getElementById("plate");
+      if (!plate) return;
+      const vw = window.innerWidth, vh = window.innerHeight;
+      if (!vw || !vh) { requestAnimationFrame(fitStage); return; }
+      const s = Math.min(vw / 3200, vh / 1660);
+      plate.style.transform = "scale(" + s + ")";
+      plate.style.left = Math.round((vw - 3200 * s) / 2) + "px";
+      plate.style.top = Math.round((vh - 1660 * s) / 2) + "px";
+    }
+    window.addEventListener("resize", fitStage);
+    window.addEventListener("load", fitStage);
+    if (window.ResizeObserver) new ResizeObserver(fitStage).observe(document.documentElement);
+    requestAnimationFrame(fitStage);
+    fitStage();
+  </script>
+</body>
+</html>

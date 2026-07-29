@@ -1,0 +1,149 @@
+1: 
+2: Name
+3: Character
+4: Code
+5: Tier
+6: Gender
+7: Role
+8: Quote
+9: Description
+10: Mechanic
+11: Concept 1
+12: Concept 2
+13: Concept 3
+14: Concept 4
+15: Concept 5
+16: Lore
+17: Appearance
+18: Req Dex
+19: Req Int
+20: Req Str
+21: Req Wis
+22: Req Cha
+23: Req End
+24: Req Luc
+25: Req Wil
+26: Dex Growth
+27: Int Growth
+28: Str Growth
+29: Wis Growth
+30: Cha Growth
+31: End Growth
+32: Luc Growth
+33: Wil Growth
+34: Weapon Name
+35: Weapon Mech
+36: Weapon Stats
+37: Armor Name
+38: Armor Stats
+39: Count
+40: Major 1
+41: Major 2
+42: Major 3
+43: Major 4
+44: Major 5
+45: Major 6
+46: Major 7
+47: Major 8
+48: Major 9
+49: Major 10
+50: Major 11
+51: Major 12
+52: Major 13
+53: Major 14
+54: Major 15
+55: Major 16
+56: Major 17
+57: Major 18
+58: Major 19
+59: Major 20
+60: Major 21
+61: Major 22
+62: Major 23
+63: Major 24
+64: Major 25
+65: Major 26
+66: Major 27
+67: Major 28
+68: Major 29
+69: Major 30
+70: Move 1
+71: Move 2
+72: Move 3
+73: Move 4
+74: Move 5
+75: Move 6
+76: Move 7
+77: Move 8
+78: Move 9
+79: Move 10
+80: Move 11
+81: Move 12
+82: Move 13
+83: Move 14
+84: Move 15
+85: Move 16
+86: Move 17
+87: Move 18
+88: Move 19
+89: Move 20
+90: Minor 1
+91: Minor 2
+92: Minor 3
+93: Minor 4
+94: Minor 5
+95: Minor 6
+96: Minor 7
+97: Minor 8
+98: Minor 9
+99: Minor 10
+100: Minor 11
+101: Minor 12
+102: Minor 13
+103: Minor 14
+104: Minor 15
+105: Minor 16
+106: Minor 17
+107: Minor 18
+108: Minor 19
+109: Minor 20
+110: Capstone Skill
+111: Class Skill 1
+112: Class Skill 2
+113: Class Skill 3
+114: Class Skill 4
+115: Class Skill 5
+116: Class Skill 6
+117: Class Skill 7
+118: Class Skill 8
+119: Class Skill 9
+120: Class Skill 10
+121: Parent Skills
+122: Effect Skills
+123: Skill Mods
+124: PassiveU1
+125: PassiveU2
+126: PassiveG1
+127: PassiveG2
+128: PassiveG3
+129: PassiveG4
+130: PassiveS1
+131: PassiveS2
+132: PassiveS3
+133: PassiveS4
+134: PassiveS5
+135: PassiveS6
+136: PassiveS7
+137: PassiveS8
+138: PassiveL1
+139: PassiveL2
+140: PassiveL3
+141: PassiveL4
+142: PassiveL5
+143: PassiveL6
+144: PassiveL7
+145: PassiveL8
+146: PassiveL9
+147: PassiveL10
+148: PassiveL11
+149: PassiveL12

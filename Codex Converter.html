@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Codex Converter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1310; --panel:#0f1c17; --panel2:#13241d; --line:#22372d;
+    --gold:#e0b766; --green:#6fbf7a; --ink:#dfe7e1; --mut:#8aa093; --red:#d08a7a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    background:radial-gradient(1200px 700px at 50% -10%, #112019 0%, var(--bg) 60%);
+    color:var(--ink); font-family:"EB Garamond",Georgia,serif;
+    min-height:100%; display:flex; align-items:flex-start; justify-content:center;
+    padding:48px 24px 80px;
+  }
+  .wrap{width:100%; max-width:760px;}
+  header{text-align:center; margin-bottom:34px;}
+  .eyebrow{font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.32em; text-transform:uppercase; color:var(--mut); margin-bottom:14px;}
+  h1{font-family:"Cinzel",serif; font-weight:600; font-size:40px; margin:0 0 6px; color:var(--gold); letter-spacing:.02em;}
+  .rule{display:flex; align-items:center; gap:14px; justify-content:center; color:var(--green); margin-top:10px;}
+  .rule::before,.rule::after{content:""; height:1px; width:80px; background:linear-gradient(90deg,transparent,var(--line));}
+  .rule::after{background:linear-gradient(90deg,var(--line),transparent);}
+  .sub{color:var(--mut); font-size:17px; max-width:520px; margin:16px auto 0; line-height:1.5;}
+  .drop{
+    margin-top:34px; border:1.5px dashed var(--line); border-radius:14px;
+    background:linear-gradient(180deg,var(--panel),#0c1813);
+    padding:54px 32px; text-align:center; cursor:pointer; transition:.18s;
+  }
+  .drop:hover,.drop.over{border-color:var(--gold); background:linear-gradient(180deg,#13241d,#0e1a14);}
+  .drop .ic{font-family:"Cinzel",serif; font-size:46px; color:var(--green); line-height:1;}
+  .drop .big{font-size:21px; margin-top:16px; color:var(--ink);}
+  .drop .small{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--mut); margin-top:10px; letter-spacing:.06em;}
+  input[type=file]{display:none;}
+  .out{margin-top:28px; display:none;}
+  .card{border:1px solid var(--line); border-radius:12px; background:var(--panel); overflow:hidden;}
+  .card h2{font-family:"Cinzel",serif; font-weight:500; font-size:15px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:0; padding:16px 20px; border-bottom:1px solid var(--line); background:var(--panel2);}
+  .stats{display:grid; grid-template-columns:repeat(3,1fr);}
+  .stat{padding:18px 20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .stat:nth-child(3n){border-right:none;}
+  .stat .n{font-family:"Cinzel",serif; font-size:30px; color:var(--green);}
+  .stat .l{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin-top:4px;}
+  .log{font-family:"JetBrains Mono",monospace; font-size:12.5px; line-height:1.7; color:var(--mut); padding:16px 20px; max-height:240px; overflow:auto; white-space:pre-wrap;}
+  .log .warn{color:var(--gold);}
+  .log .err{color:var(--red);}
+  .log .ok{color:var(--green);}
+  .actions{display:flex; gap:12px; padding:18px 20px; border-top:1px solid var(--line); flex-wrap:wrap;}
+  button{
+    font-family:"JetBrains Mono",monospace; font-size:13px; letter-spacing:.06em;
+    border:1px solid var(--line); background:var(--panel2); color:var(--ink);
+    padding:12px 20px; border-radius:9px; cursor:pointer; transition:.15s;
+  }
+  button.primary{background:var(--gold); color:#1a130a; border-color:var(--gold); font-weight:500;}
+  button:hover{border-color:var(--green);}
+  button.primary:hover{filter:brightness(1.06);}
+  .note{font-size:14.5px; color:var(--mut); line-height:1.6; margin-top:26px; border-left:2px solid var(--line); padding:4px 0 4px 16px;}
+  .note b{color:var(--ink); font-weight:500;}
+  code{font-family:"JetBrains Mono",monospace; font-size:.86em; color:var(--green);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">Character Codex · Pipeline</div>
+      <h1>Codex Converter</h1>
+      <div class="rule">◆</div>
+      <p class="sub">Drop your <b>Class Codex Template</b> spreadsheet to regenerate <code>codex.gen.js</code> — the data file the codex reads. Everything runs in your browser; nothing is uploaded.</p>
+    </header>
+
+    <label class="drop" id="drop">
+      <div class="ic">✦</div>
+      <div class="big">Drop the .xlsx here, or click to choose</div>
+      <div class="small">CLASS CODEX TEMPLATE · .XLSX</div>
+      <input type="file" id="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+    </label>
+
+    <div class="out" id="out">
+      <div class="card">
+        <h2 id="outTitle">Result</h2>
+        <div class="stats" id="stats"></div>
+        <div class="log" id="log"></div>
+        <div class="actions">
+          <button class="primary" id="dl">Download codex.gen.js</button>
+          <button id="again">Convert another</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">
+      <b>How to use the output:</b> download <code>codex.gen.js</code> and replace the file of the same name in the project (drag it into the file list, or hand it to me and say “use this codex.gen.js”). The Character Codex picks it up on next load — no other files need to change.
+    </p>
+  </div>
+
+<script>
+// ============================ XLSX reader (zip + sheets) ============================
+async function inflateRaw(bytes){
+  return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer());
+}
+function getEntries(buf){
+  const dv=new DataView(buf.buffer);
+  let eocd=-1;
+  for(let p=buf.length-22;p>=0;p--){ if(dv.getUint32(p,true)===0x06054b50){eocd=p;break;} }
+  if(eocd<0) throw new Error("Not a valid .xlsx (no zip end record).");
+  const cdOffset=dv.getUint32(eocd+16,true), cdCount=dv.getUint16(eocd+10,true);
+  let p=cdOffset; const entries=[];
+  for(let n=0;n<cdCount;n++){
+    if(dv.getUint32(p,true)!==0x02014b50) break;
+    const comp=dv.getUint16(p+10,true), csize=dv.getUint32(p+20,true);
+    const fnlen=dv.getUint16(p+28,true), eflen=dv.getUint16(p+30,true), cmlen=dv.getUint16(p+32,true);
+    const lho=dv.getUint32(p+42,true);
+    const name=new TextDecoder().decode(buf.subarray(p+46,p+46+fnlen));
+    entries.push({name,comp,csize,lho}); p+=46+fnlen+eflen+cmlen;
+  }
+  return {entries,buf,dv};
+}
+async function readEntry(z,name){
+  const e=z.entries.find(x=>x.name===name); if(!e) return null;
+  const lfnlen=z.dv.getUint16(e.lho+26,true), leflen=z.dv.getUint16(e.lho+28,true);
+  const ds=e.lho+30+lfnlen+leflen, comp=z.buf.subarray(ds,ds+e.csize);
+  return e.comp===0 ? comp : await inflateRaw(comp);
+}
+function unesc(s){return s.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&#10;/g,"\n").replace(/&#xA;/gi,"\n").replace(/&#9;/g,"\t").replace(/&apos;/g,"'").replace(/&amp;/g,"&");}
+function colToNum(col){let n=0;for(const c of col)n=n*26+(c.charCodeAt(0)-64);return n-1;}
+function parseSharedStrings(xml){
+  const strs=[]; const re=/<si>([\s\S]*?)<\/si>/g; let m;
+  while((m=re.exec(xml))){ const t=[...m[1].matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map(x=>unesc(x[1])).join(""); strs.push(t); }
+  return strs;
+}
+function parseSheet(xml,strs){
+  const rows=[]; const rowRe=/<row[^>]*?r="(\d+)"[^>]*?>([\s\S]*?)<\/row>/g; let rm;
+  while((rm=rowRe.exec(xml))){
+    const rIdx=+rm[1]-1, cells=[];
+    const cellRe=/<c r="([A-Z]+)\d+"((?:[^>]*?))(?:\/>|>([\s\S]*?)<\/c>)/g; let cm;
+    while((cm=cellRe.exec(rm[2]))){
+      const col=colToNum(cm[1]), attrs=cm[2]||"", inner=cm[3]||"";
+      const tM=attrs.match(/t="([^"]*)"/), t=tM?tM[1]:null;
+      let val="";
+      if(t==="s"){const v=inner.match(/<v>(\d+)<\/v>/); if(v) val=strs[+v[1]];}
+      else if(t==="inlineStr"){val=[...inner.matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map(x=>unesc(x[1])).join("");}
+      else {const v=inner.match(/<v>([\s\S]*?)<\/v>/); if(v) val=unesc(v[1]);}
+      cells[col]=val;
+    }
+    rows[rIdx]=cells;
+  }
+  return rows;
+}
+async function loadWorkbook(arrayBuf){
+  const z=getEntries(new Uint8Array(arrayBuf));
+  const wbXml=new TextDecoder().decode(await readEntry(z,"xl/workbook.xml"));
+  const relsXml=new TextDecoder().decode(await readEntry(z,"xl/_rels/workbook.xml.rels"));
+  const relMap={}; for(const m of relsXml.matchAll(/<Relationship Id="([^"]+)"[^>]*Target="([^"]+)"/g)) relMap[m[1]]=m[2];
+  const sheets={}; // name -> rows
+  for(const m of wbXml.matchAll(/<sheet [^>]*name="([^"]*)"[^>]*r:id="([^"]*)"/g)){
+    const name=m[1], rid=m[2]; let target=relMap[rid]; if(!target) continue;
+    if(!target.startsWith("xl/")) target="xl/"+target.replace(/^\//,"");
+    sheets[name]={target};
+  }
+  const strs=parseSharedStrings(new TextDecoder().decode(await readEntry(z,"xl/sharedStrings.xml")||new Uint8Array()));
+  for(const name in sheets){
+    const bytes=await readEntry(z,sheets[name].target);
+    sheets[name].rows = bytes ? parseSheet(new TextDecoder().decode(bytes),strs) : [];
+  }
+  return sheets;
+}
+
+// ============================ Generator (validated against prior codex) ============================
+const STAT_KEYS=["Str","Dex","Int","Wis","End","Wil","Cha","Luc"];
+const slug=s=>(s||"").toString().trim().toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const ws=s=>(s||"").toString().replace(/\s+/g," ").trim();
+function firstSentence(d){ if(!d) return d; const m=d.match(/^([\s\S]*?[.!?])(\s|$)/); return m?m[1]:d; }
+const SEPS=[" \u2014 "," \u2013 "," - "];
+function splitSep(v){ let i=-1,sl=0; for(const s of SEPS){const j=v.indexOf(s); if(j>=0&&(i<0||j<i)){i=j;sl=s.length;}} return i<0?[v,null]:[v.slice(0,i),v.slice(i+sl)]; }
+function parseNamed(str){ if(!str) return null; const v=ws(str); let [h0,t0]=splitSep(v);
+  if(t0==null){ const ci=v.indexOf(": "); if(ci>0){ h0=v.slice(0,ci); t0=v.slice(ci+2); } }
+  let head=h0.trim(), text=(t0||"").trim(), tag=null;
+  const tm=head.match(/^(.*?)\s*\(([^)]*)\)\s*$/); if(tm){head=tm[1].trim();tag=tm[2].trim();} return {name:head,tag,text}; }
+// Concept cells are either a short keyword ("Aim") or "Title: full description".
+function parseConcepts(rows,L,col){const out=[];for(let i=1;i<=5;i++){const lab="Concept "+i;if(L[lab]==null)continue;const raw=ws(cell(rows,L[lab],col));if(!raw)continue;const ci=raw.indexOf(": ");if(ci>0&&raw.length-ci>14){out.push({name:raw.slice(0,ci).trim(),text:raw.slice(ci+2).trim()});}else{out.push({name:raw.replace(/:\s*$/,"").trim()});}}return out;}
+function parseAbility(str,owner){ const [h,t]=splitSep(ws(str)); let name=h.trim(), desc=(t||"").trim();
+  if(owner){ const re=new RegExp("\\s*\\("+owner.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\)$"); desc=desc.replace(re,"").trim(); }
+  return [name,desc,false]; }
+function labelMap(rows){ const m={}; for(let r=0;r<rows.length;r++){const lab=(rows[r]&&rows[r][0]||"").toString().trim(); if(lab&&!(lab in m)) m[lab]=r;} return m; }
+function cell(rows,ri,col){ if(ri==null) return ""; const r=rows[ri]; if(!r) return ""; const v=r[col]; return v==null?"":v.toString(); }
+const REQ={Str:"Req Str",Dex:"Req Dex",Int:"Req Int",Wis:"Req Wis",End:"Req End",Wil:"Req Wil",Cha:"Req Cha",Luc:"Req Luc"};
+const GROW={Str:"Str Growth",Dex:"Dex Growth",Int:"Int Growth",Wis:"Wis Growth",End:"End Growth",Wil:"Wil Growth",Cha:"Cha Growth",Luc:"Luc Growth"};
+const PASS=[["PassiveU","U"],["PassiveG1","G"],["PassiveG2","G"],["PassiveS1","S"],["PassiveS2","S"],["PassiveS3","S"],["PassiveS4","S"],["PassiveL1","L"],["PassiveL2","L"],["PassiveL3","L"],["PassiveL4","L"],["PassiveL5","L"],["PassiveL6","L"]];
+function statReqs(rows,L,col){const o={};for(const k of STAT_KEYS){const v=cell(rows,L[REQ[k]],col).trim();if(v!=="")o[k]=Number(v);}return o;}
+function statBlock(rows,L,col){const o={};for(const k of STAT_KEYS){const rq=cell(rows,L[REQ[k]],col).trim(),g=cell(rows,L[GROW[k]],col).trim();o[k]=[0,0,rq===""?0:Number(rq),g===""?0:Number(g)];}return o;}
+function passives(rows,L,col,gloss){const out=[];for(const [rl,rar] of PASS){if(L[rl]==null)continue;const nm=cell(rows,L[rl],col).trim();if(nm==="")continue;out.push([nm,rar,ws(gloss[nm]||"")]);}return out;}
+function abilityGroup(rows,L,col,pre,max,owner){const a=[];for(let i=1;i<=max;i++){const lab=pre+" "+i;if(L[lab]==null)continue;const v=cell(rows,L[lab],col).trim();if(v==="")continue;a.push(parseAbility(v,owner));}return a;}
+function classSkills(rows,L,col,max){const a=[];for(let i=1;i<=max;i++){const lab="Class Skill "+i;if(L[lab]==null)continue;const v=cell(rows,L[lab],col).trim();if(v==="")continue;a.push(v);}return a;}
+function buildGlossary(rows){const g={};for(let r=0;r<rows.length;r++){const k=(rows[r]&&rows[r][0]||"").toString().trim();const v=(rows[r]&&rows[r][1]||"").toString();if(k&&!(k in g))g[k]=v;}return g;}
+function colCount(rows,L){const nr=rows[L["Name"]]; return nr?nr.length:0;}
+
+function genSubclasses(rows,gloss,warn){
+  const L=labelMap(rows), subByClass={}, N=L["Name"], B=L["Base Class"];
+  for(let col=2; col<=colCount(rows,L); col++){
+    const name=cell(rows,N,col).trim(); if(name==="") continue;
+    const cls=cell(rows,B,col).trim(); if(cls===""){warn("Subclass \""+name+"\" has no Base Class — skipped.");continue;}
+    const cid=slug(cls), r={};
+    r.id=slug(name); r.name=name; r.code=cell(rows,L["Code"],col).trim()||null;
+    const tv=cell(rows,L["Tier"],col).trim(); r.tier=tv===""?null:(isNaN(+tv)?tv:+tv);
+    r.gender=cell(rows,L["Gender"],col).trim()||null;
+    r.deity=cell(rows,L["Associated Demon"],col).trim();
+    const desc=ws(cell(rows,L["Description"],col)); r.description=desc; r.blurb=firstSentence(desc);
+    const mv=cell(rows,L["Mechanic"],col).trim(); if(mv) r.mechanic=parseNamed(mv);
+    const wn=cell(rows,L["Weapon Name"],col).trim(), wm=cell(rows,L["Weapon Mech"],col).trim();
+    r.weapon=(wn||wm)?{name:wn,effect:wm}:null;
+    r.statReqs=statReqs(rows,L,col);
+    r.abilities={Major:abilityGroup(rows,L,col,"Major",30,name),Move:abilityGroup(rows,L,col,"Move",20,name),Minor:abilityGroup(rows,L,col,"Minor",20,name)};
+    r.classSkills=classSkills(rows,L,col,12);
+    const cv=cell(rows,L["Capstone Skill"],col).trim(); if(cv) r.capstone=parseNamed(cv);
+    r.passives=passives(rows,L,col,gloss); r.baseClass=cls;
+    const lore=ws(cell(rows,L["Lore"],col)); if(lore) r.worldNotes=lore;
+    r.stats=statBlock(rows,L,col);
+    (subByClass[cid]=subByClass[cid]||[]).push(r);
+  }
+  return subByClass;
+}
+function genBase(rows){
+  const L=labelMap(rows), baseById={}, N=L["Name"];
+  for(let col=2; col<=colCount(rows,L); col++){
+    const name=cell(rows,N,col).trim(); if(name==="") continue;
+    const r={}; r.id=slug(name); r.name=name; r.code=null;
+    const tv=cell(rows,L["Tier"],col).trim(); r.tier=tv===""?null:(/^base$/i.test(tv)?1:(isNaN(+tv)?tv:+tv));
+    r.gender=cell(rows,L["Gender"],col).trim()||null; r.kind="base";
+    r.role=cell(rows,L["Role"],col).trim()||null;
+    r.character=cell(rows,L["Character"],col).trim()||null;
+    const qv=ws(cell(rows,L["Quote"],col)); if(qv) r.quote=qv;
+    r.description=ws(cell(rows,L["Description"],col));
+    const mv=cell(rows,L["Mechanic"],col).trim(); if(mv) r.mechanic=parseNamed(mv);
+    const concepts=parseConcepts(rows,L,col); if(concepts.length) r.concepts=concepts;
+    const lore=ws(cell(rows,L["Lore"],col)); if(lore) r.worldNotes=lore;
+    const wn=cell(rows,L["Weapon Name"],col).trim(), wm=cell(rows,L["Weapon Mech"],col).trim();
+    r.weapon=(wn||wm)?{name:wn,effect:wm}:null;
+    r.stats=statBlock(rows,L,col);
+    r.abilities={Major:abilityGroup(rows,L,col,"Major",30,name).map(a=>[a[0],a[1]]),Move:abilityGroup(rows,L,col,"Move",20,name).map(a=>[a[0],a[1]]),Minor:abilityGroup(rows,L,col,"Minor",20,name).map(a=>[a[0],a[1]])};
+    const cv=cell(rows,L["Capstone Skill"],col).trim(); if(cv) r.capstone=parseNamed(cv);
+    baseById[r.id]=r;
+  }
+  return baseById;
+}
+function genDuals(rows,gloss,warn){
+  const L=labelMap(rows), duals=[], N=L["Name"], seen={};
+  for(let col=2; col<=colCount(rows,L); col++){
+    const name=cell(rows,N,col).trim(); if(name==="") continue;
+    const c1=cell(rows,L["Class 1"],col).trim(), c2=cell(rows,L["Class 2"],col).trim(), r={};
+    r.id="dual-"+slug(c1)+"-"+slug(c2);
+    if(seen[r.id]) warn("Duplicate dual id \""+r.id+"\" ("+seen[r.id]+" & "+name+") — check Class 1/Class 2.");
+    seen[r.id]=name;
+    r.name=name; r.code=cell(rows,L["Code"],col).trim()||null;
+    const tv=cell(rows,L["Tier"],col).trim(); r.tier=tv===""?null:(isNaN(+tv)?tv:+tv);
+    r.gender=cell(rows,L["Gender"],col).trim()||null;
+    r.deity=cell(rows,L["Associated Demon"],col).trim(); r.kind="dual"; r.c1=c1; r.c2=c2;
+    const qv=ws(cell(rows,L["Quote"],col)); if(qv) r.quote=qv;
+    r.statReqs=statReqs(rows,L,col); r.passives=passives(rows,L,col,gloss); r.stats=statBlock(rows,L,col);
+    duals.push(r);
+  }
+  return duals;
+}
+
+// ============================ UI wiring ============================
+const $=id=>document.getElementById(id);
+function pick(sheets,names){ for(const n of names){ if(sheets[n]) return sheets[n].rows; } return null; }
+
+async function convert(file){
+  const log=$("log"); log.innerHTML=""; const warnings=[];
+  const warn=m=>{warnings.push(m);};
+  const line=(t,cls)=>{const d=document.createElement("div"); if(cls)d.className=cls; d.textContent=t; log.appendChild(d);};
+  $("out").style.display="block"; $("outTitle").textContent=file.name;
+  $("stats").innerHTML=""; $("dl").disabled=true;
+  try{
+    line("Reading workbook…");
+    const sheets=await loadWorkbook(await file.arrayBuffer());
+    const names=Object.keys(sheets);
+    line("Sheets: "+names.join(", "));
+    const s2=pick(sheets,["SubclassAspects"]);
+    const s3=pick(sheets,["Base Class Aspects"]);
+    const s5=pick(sheets,["Dualclass Aspects"]);
+    const s7=pick(sheets,["Glossary"]);
+    if(!s2) throw new Error("Missing sheet \"SubclassAspects\".");
+    if(!s3) throw new Error("Missing sheet \"Base Class Aspects\".");
+    if(!s5) throw new Error("Missing sheet \"Dualclass Aspects\".");
+    const gloss=s7?buildGlossary(s7):{};
+    if(!s7) warn("No \"Glossary\" sheet — passive descriptions will be blank.");
+
+    const data={ subByClass:genSubclasses(s2,gloss,warn), baseById:genBase(s3), duals:genDuals(s5,gloss,warn) };
+    let subCount=0; for(const c in data.subByClass) subCount+=data.subByClass[c].length;
+
+    const out="window.CODEX_GEN = "+JSON.stringify(data,null,1)+";\n";
+    window.__codexOut=out;
+
+    const grid=[["Classes",Object.keys(data.subByClass).length],["Subclasses",subCount],["Base Classes",Object.keys(data.baseById).length],["Dual Classes",data.duals.length],["Glossary Terms",Object.keys(gloss).length],["Output Size",(out.length/1024).toFixed(0)+" KB"]];
+    $("stats").innerHTML=grid.map(([l,n])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join("");
+
+    line("Parsed "+subCount+" subclasses across "+Object.keys(data.subByClass).length+" classes.","ok");
+    if(warnings.length){ warnings.forEach(w=>line("⚠ "+w,"warn")); }
+    else line("No warnings — clean conversion.","ok");
+    line("Ready. Click Download to save codex.gen.js.","ok");
+    $("dl").disabled=false;
+  }catch(e){
+    line("✗ "+e.message,"err");
+    console.error(e);
+  }
+}
+
+function download(){
+  if(!window.__codexOut) return;
+  const blob=new Blob([window.__codexOut],{type:"text/javascript"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="codex.gen.js";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+
+const drop=$("drop"), fileInput=$("file");
+drop.addEventListener("dragover",e=>{e.preventDefault();drop.classList.add("over");});
+drop.addEventListener("dragleave",()=>drop.classList.remove("over"));
+drop.addEventListener("drop",e=>{e.preventDefault();drop.classList.remove("over"); const f=e.dataTransfer.files[0]; if(f) convert(f);});
+fileInput.addEventListener("change",e=>{const f=e.target.files[0]; if(f) convert(f);});
+$("dl").addEventListener("click",download);
+$("again").addEventListener("click",()=>{$("out").style.display="none"; fileInput.value=""; window.__codexOut=null;});
+</script>
+
+<template id="__bundler_thumbnail" data-bg-color="#0a1310">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a1310"/>
+    <rect x="430" y="250" width="340" height="300" rx="16" fill="none" stroke="#b8924a" stroke-width="6"/>
+    <path d="M600 330 v140 M540 410 h120" stroke="#6fbf7a" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="600" cy="200" r="10" fill="#e0b766"/>
+  </svg>
+</template>
+</body>
+</html>

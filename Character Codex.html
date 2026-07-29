@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Character Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<!-- Resources referenced as strings in JS (lifted for the offline bundler) -->
+<meta name="ext-resource-dependency" content="icons/scout.png" data-resource-id="scout" />
+<meta name="ext-resource-dependency" content="icons/huntsman.png" data-resource-id="huntsman" />
+<meta name="ext-resource-dependency" content="icons/crossbowman.png" data-resource-id="crossbowman" />
+<meta name="ext-resource-dependency" content="icons/marksman.png" data-resource-id="marksman" />
+<meta name="ext-resource-dependency" content="icons/falconer.png" data-resource-id="falconer" />
+<meta name="ext-resource-dependency" content="icons/bounty-hunter.png" data-resource-id="bountyHunter" />
+<meta name="ext-resource-dependency" content="icons/stalker.png" data-resource-id="stalker" />
+<meta name="ext-resource-dependency" content="icons/poacher.png" data-resource-id="poacher" />
+<meta name="ext-resource-dependency" content="icons/sharpshooter.png" data-resource-id="sharpshooter" />
+<meta name="ext-resource-dependency" content="icons/toxophilite.png" data-resource-id="toxophilite" />
+<meta name="ext-resource-dependency" content="icons/brute.png" data-resource-id="brute" />
+<meta name="ext-resource-dependency" content="icons/raider.png" data-resource-id="raider" />
+<meta name="ext-resource-dependency" content="icons/berserker.png" data-resource-id="berserker" />
+<meta name="ext-resource-dependency" content="icons/marauder.png" data-resource-id="marauder" />
+<meta name="ext-resource-dependency" content="icons/viking.png" data-resource-id="viking" />
+<meta name="ext-resource-dependency" content="icons/vandal.png" data-resource-id="vandal" />
+<meta name="ext-resource-dependency" content="icons/fury.png" data-resource-id="fury" />
+<meta name="ext-resource-dependency" content="icons/cannibal.png" data-resource-id="cannibal" />
+<meta name="ext-resource-dependency" content="icons/destroyer.png" data-resource-id="destroyer" />
+<meta name="ext-resource-dependency" content="icons/beastlord.png" data-resource-id="beastlord" />
+<meta name="ext-resource-dependency" content="icons/wizard/elementalist.png" data-resource-id="wizElementalist" />
+<meta name="ext-resource-dependency" content="icons/wizard/necromancer.png" data-resource-id="wizNecromancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/hydromancer.png" data-resource-id="wizHydromancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/geomancer.png" data-resource-id="wizGeomancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/aeromancer.png" data-resource-id="wizAeromancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/pyromancer.png" data-resource-id="wizPyromancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/arcanist.png" data-resource-id="wizArcanist" />
+<meta name="ext-resource-dependency" content="icons/wizard/solomancer.png" data-resource-id="wizSolomancer" />
+<meta name="ext-resource-dependency" content="icons/wizard/incanter.png" data-resource-id="wizIncanter" />
+<meta name="ext-resource-dependency" content="icons/wizard/thaumaturge.png" data-resource-id="wizThaumaturge" />
+<meta name="ext-resource-dependency" content="icons/witch/cultist.png" data-resource-id="witCultist" />
+<meta name="ext-resource-dependency" content="icons/witch/warlock.png" data-resource-id="witWarlock" />
+<meta name="ext-resource-dependency" content="icons/witch/effigist.png" data-resource-id="witEffigist" />
+<meta name="ext-resource-dependency" content="icons/witch/dustbringer.png" data-resource-id="witDustbringer" />
+<meta name="ext-resource-dependency" content="icons/witch/crone.png" data-resource-id="witCrone" />
+<meta name="ext-resource-dependency" content="icons/witch/hedgemage.png" data-resource-id="witHedgemage" />
+<meta name="ext-resource-dependency" content="icons/witch/mambo.png" data-resource-id="witMambo" />
+<meta name="ext-resource-dependency" content="icons/witch/bokor.png" data-resource-id="witBokor" />
+<meta name="ext-resource-dependency" content="icons/witch/hag.png" data-resource-id="witHag" />
+<meta name="ext-resource-dependency" content="icons/witch/malefax.png" data-resource-id="witMalefax" />
+<meta name="ext-resource-dependency" content="icons/bard/minstrel.png" data-resource-id="bardMinstrel" />
+<meta name="ext-resource-dependency" content="icons/bard/jester.png" data-resource-id="bardJester" />
+<meta name="ext-resource-dependency" content="icons/bard/dirge-singer.png" data-resource-id="bardDirgeSinger" />
+<meta name="ext-resource-dependency" content="icons/bard/balladeer.png" data-resource-id="bardBalladeer" />
+<meta name="ext-resource-dependency" content="icons/bard/drummer.png" data-resource-id="bardDrummer" />
+<meta name="ext-resource-dependency" content="icons/bard/spy.png" data-resource-id="bardSpy" />
+<meta name="ext-resource-dependency" content="icons/bard/mountebank.png" data-resource-id="bardMountebank" />
+<meta name="ext-resource-dependency" content="icons/bard/diva.png" data-resource-id="bardDiva" />
+<meta name="ext-resource-dependency" content="icons/bard/muse.png" data-resource-id="bardMuse" />
+<meta name="ext-resource-dependency" content="icons/bard/lantern-bearer.png" data-resource-id="bardLanternBearer" />
+<meta name="ext-resource-dependency" content="icons/binder/conjurer.png" data-resource-id="bndConjurer" />
+<meta name="ext-resource-dependency" content="icons/binder/occultist.png" data-resource-id="bndOccultist" />
+<meta name="ext-resource-dependency" content="icons/binder/shaman.png" data-resource-id="bndShaman" />
+<meta name="ext-resource-dependency" content="icons/binder/medium.png" data-resource-id="bndMedium" />
+<meta name="ext-resource-dependency" content="icons/binder/animist.png" data-resource-id="bndAnimist" />
+<meta name="ext-resource-dependency" content="icons/binder/spiritualist.png" data-resource-id="bndSpiritualist" />
+<meta name="ext-resource-dependency" content="icons/binder/astrologer.png" data-resource-id="bndAstrologer" />
+<meta name="ext-resource-dependency" content="icons/binder/vizier.png" data-resource-id="bndVizier" />
+<meta name="ext-resource-dependency" content="icons/binder/alienist.png" data-resource-id="bndAlienist" />
+<meta name="ext-resource-dependency" content="icons/binder/pact-master.png" data-resource-id="bndPactMaster" />
+<meta name="ext-resource-dependency" content="icons/cleric/acolyte.png" data-resource-id="clrAcolyte" />
+<meta name="ext-resource-dependency" content="icons/cleric/healer.png" data-resource-id="clrHealer" />
+<meta name="ext-resource-dependency" content="icons/cleric/disciple.png" data-resource-id="clrDisciple" />
+<meta name="ext-resource-dependency" content="icons/cleric/priest.png" data-resource-id="clrPriest" />
+<meta name="ext-resource-dependency" content="icons/cleric/combat-medic.png" data-resource-id="clrCombatMedic" />
+<meta name="ext-resource-dependency" content="icons/cleric/exorcist.png" data-resource-id="clrExorcist" />
+<meta name="ext-resource-dependency" content="icons/cleric/preacher.png" data-resource-id="clrPreacher" />
+<meta name="ext-resource-dependency" content="icons/cleric/zealot.png" data-resource-id="clrZealot" />
+<meta name="ext-resource-dependency" content="icons/cleric/plague-doctor.png" data-resource-id="clrPlagueDoctor" />
+<meta name="ext-resource-dependency" content="icons/cleric/oracle.png" data-resource-id="clrOracle" />
+<meta name="ext-resource-dependency" content="icons/fighter/gladiator.png" data-resource-id="ftrGladiator" />
+<meta name="ext-resource-dependency" content="icons/fighter/duelist.png" data-resource-id="ftrDuelist" />
+<meta name="ext-resource-dependency" content="icons/fighter/phalanx.png" data-resource-id="ftrPhalanx" />
+<meta name="ext-resource-dependency" content="icons/fighter/dervish.png" data-resource-id="ftrDervish" />
+<meta name="ext-resource-dependency" content="icons/fighter/fencer.png" data-resource-id="ftrFencer" />
+<meta name="ext-resource-dependency" content="icons/fighter/lancer.png" data-resource-id="ftrLancer" />
+<meta name="ext-resource-dependency" content="icons/fighter/samurai.png" data-resource-id="ftrSamurai" />
+<meta name="ext-resource-dependency" content="icons/fighter/dreadnaught.png" data-resource-id="ftrDreadnaught" />
+<meta name="ext-resource-dependency" content="icons/fighter/swashbuckler.png" data-resource-id="ftrSwashbuckler" />
+<meta name="ext-resource-dependency" content="icons/fighter/warlord.png" data-resource-id="ftrWarlord" />
+<meta name="ext-resource-dependency" content="icons/knight/bodyguard.png" data-resource-id="kntBodyguard" />
+<meta name="ext-resource-dependency" content="icons/knight/champion.png" data-resource-id="kntChampion" />
+<meta name="ext-resource-dependency" content="icons/knight/hospitaler.png" data-resource-id="kntHospitaler" />
+<meta name="ext-resource-dependency" content="icons/knight/sentinel.png" data-resource-id="kntSentinel" />
+<meta name="ext-resource-dependency" content="icons/knight/dragoon.png" data-resource-id="kntDragoon" />
+<meta name="ext-resource-dependency" content="icons/knight/cavalier.png" data-resource-id="kntCavalier" />
+<meta name="ext-resource-dependency" content="icons/knight/paragon.png" data-resource-id="kntParagon" />
+<meta name="ext-resource-dependency" content="icons/knight/blackguard.png" data-resource-id="kntBlackguard" />
+<meta name="ext-resource-dependency" content="icons/knight/crusader.png" data-resource-id="kntCrusader" />
+<meta name="ext-resource-dependency" content="icons/knight/templar.png" data-resource-id="kntTemplar" />
+<meta name="ext-resource-dependency" content="icons/monk/initiate.png" data-resource-id="mnkInitiate" />
+<meta name="ext-resource-dependency" content="icons/monk/pugilist.png" data-resource-id="mnkPugilist" />
+<meta name="ext-resource-dependency" content="icons/monk/skirmisher.png" data-resource-id="mnkSkirmisher" />
+<meta name="ext-resource-dependency" content="icons/monk/vajra.png" data-resource-id="mnkVajra" />
+<meta name="ext-resource-dependency" content="icons/monk/stonefist.png" data-resource-id="mnkStonefist" />
+<meta name="ext-resource-dependency" content="icons/monk/infiltrator.png" data-resource-id="mnkInfiltrator" />
+<meta name="ext-resource-dependency" content="icons/monk/viper-fang.png" data-resource-id="mnkViperFang" />
+<meta name="ext-resource-dependency" content="icons/monk/ascetic.png" data-resource-id="mnkAscetic" />
+<meta name="ext-resource-dependency" content="icons/monk/thunderfist.png" data-resource-id="mnkThunderfist" />
+<meta name="ext-resource-dependency" content="icons/monk/drunken-master.png" data-resource-id="mnkDrunkenMaster" />
+<meta name="ext-resource-dependency" content="icons/psychic/telepath.png" data-resource-id="psyTelepath" />
+<meta name="ext-resource-dependency" content="icons/psychic/kinetic.png" data-resource-id="psyKinetic" />
+<meta name="ext-resource-dependency" content="icons/psychic/amnesiac.png" data-resource-id="psyAmnesiac" />
+<meta name="ext-resource-dependency" content="icons/psychic/hypnotist.png" data-resource-id="psyHypnotist" />
+<meta name="ext-resource-dependency" content="icons/psychic/diviner.png" data-resource-id="psyDiviner" />
+<meta name="ext-resource-dependency" content="icons/psychic/haunted.png" data-resource-id="psyHaunted" />
+<meta name="ext-resource-dependency" content="icons/psychic/mastermind.png" data-resource-id="psyMastermind" />
+<meta name="ext-resource-dependency" content="icons/psychic/mindbleeder.png" data-resource-id="psyMindbleeder" />
+<meta name="ext-resource-dependency" content="icons/psychic/chronomancer.png" data-resource-id="psyChronomancer" />
+<meta name="ext-resource-dependency" content="icons/psychic/puppet-master.png" data-resource-id="psyPuppetMaster" />
+<meta name="ext-resource-dependency" content="icons/reaper/buccaneer.png" data-resource-id="reaBuccaneer" />
+<meta name="ext-resource-dependency" content="icons/reaper/executioner.png" data-resource-id="reaExecutioner" />
+<meta name="ext-resource-dependency" content="icons/reaper/gravedigger.png" data-resource-id="reaGravedigger" />
+<meta name="ext-resource-dependency" content="icons/reaper/hangman.png" data-resource-id="reaHangman" />
+<meta name="ext-resource-dependency" content="icons/reaper/harbinger.png" data-resource-id="reaHarbinger" />
+<meta name="ext-resource-dependency" content="icons/reaper/sin-eater.png" data-resource-id="reaSinEater" />
+<meta name="ext-resource-dependency" content="icons/reaper/sandman.png" data-resource-id="reaSandman" />
+<meta name="ext-resource-dependency" content="icons/reaper/whisperer.png" data-resource-id="reaWhisperer" />
+<meta name="ext-resource-dependency" content="icons/reaper/mercy-bringer.png" data-resource-id="reaMercyBringer" />
+<meta name="ext-resource-dependency" content="icons/reaper/gaslighter.png" data-resource-id="reaGaslighter" />
+<meta name="ext-resource-dependency" content="icons/rogue/bandit.png" data-resource-id="rogBandit" />
+<meta name="ext-resource-dependency" content="icons/rogue/cutthroat.png" data-resource-id="rogCutthroat" />
+<meta name="ext-resource-dependency" content="icons/rogue/burglar.png" data-resource-id="rogBurglar" />
+<meta name="ext-resource-dependency" content="icons/rogue/thief.png" data-resource-id="rogThief" />
+<meta name="ext-resource-dependency" content="icons/rogue/acrobat.png" data-resource-id="rogAcrobat" />
+<meta name="ext-resource-dependency" content="icons/rogue/assassin.png" data-resource-id="rogAssassin" />
+<meta name="ext-resource-dependency" content="icons/rogue/brigand.png" data-resource-id="rogBrigand" />
+<meta name="ext-resource-dependency" content="icons/rogue/smuggler.png" data-resource-id="rogSmuggler" />
+<meta name="ext-resource-dependency" content="icons/rogue/skulk.png" data-resource-id="rogSkulk" />
+<meta name="ext-resource-dependency" content="icons/rogue/ninja.png" data-resource-id="rogNinja" />
+<meta name="ext-resource-dependency" content="icons/spellsword/blitzknecht.png" data-resource-id="splBlitzknecht" />
+<meta name="ext-resource-dependency" content="icons/spellsword/feuerknecht.png" data-resource-id="splFeuerknecht" />
+<meta name="ext-resource-dependency" content="icons/spellsword/drecknecht.png" data-resource-id="splDrecknecht" />
+<meta name="ext-resource-dependency" content="icons/spellsword/trinknecht.png" data-resource-id="splTrinknecht" />
+<meta name="ext-resource-dependency" content="icons/spellsword/mercenary.png" data-resource-id="splMercenary" />
+<meta name="ext-resource-dependency" content="icons/spellsword/transmuter.png" data-resource-id="splTransmuter" />
+<meta name="ext-resource-dependency" content="icons/spellsword/force-weaver.png" data-resource-id="splForceWeaver" />
+<meta name="ext-resource-dependency" content="icons/spellsword/myrmidon.png" data-resource-id="splMyrmidon" />
+<meta name="ext-resource-dependency" content="icons/spellsword/nightblade.png" data-resource-id="splNightblade" />
+<meta name="ext-resource-dependency" content="icons/spellsword/sword-saint.png" data-resource-id="splSwordSaint" />
+<meta name="ext-resource-dependency" content="icons/runemage/abjurer.png" data-resource-id="runAbjurer" />
+<meta name="ext-resource-dependency" content="icons/runemage/symbolist.png" data-resource-id="runSymbolist" />
+<meta name="ext-resource-dependency" content="icons/runemage/cabalist.png" data-resource-id="runCabalist" />
+<meta name="ext-resource-dependency" content="icons/runemage/hermit.png" data-resource-id="runHermit" />
+<meta name="ext-resource-dependency" content="icons/runemage/disenchanter.png" data-resource-id="runDisenchanter" />
+<meta name="ext-resource-dependency" content="icons/runemage/scrivener.png" data-resource-id="runScrivener" />
+<meta name="ext-resource-dependency" content="icons/runemage/sage.png" data-resource-id="runSage" />
+<meta name="ext-resource-dependency" content="icons/runemage/glyphic.png" data-resource-id="runGlyphic" />
+<meta name="ext-resource-dependency" content="icons/runemage/cryptic.png" data-resource-id="runCryptic" />
+<meta name="ext-resource-dependency" content="icons/runemage/sorcerer.png" data-resource-id="runSorcerer" />
+<meta name="ext-resource-dependency" content="icons/teknixian/scavenger.png" data-resource-id="tekScavenger" />
+<meta name="ext-resource-dependency" content="icons/teknixian/alchemist.png" data-resource-id="tekAlchemist" />
+<meta name="ext-resource-dependency" content="icons/teknixian/artificer.png" data-resource-id="tekArtificer" />
+<meta name="ext-resource-dependency" content="icons/teknixian/tinker.png" data-resource-id="tekTinker" />
+<meta name="ext-resource-dependency" content="icons/teknixian/engineer.png" data-resource-id="tekEngineer" />
+<meta name="ext-resource-dependency" content="icons/teknixian/bomber.png" data-resource-id="tekBomber" />
+<meta name="ext-resource-dependency" content="icons/teknixian/gunslinger.png" data-resource-id="tekGunslinger" />
+<meta name="ext-resource-dependency" content="icons/teknixian/savant.png" data-resource-id="tekSavant" />
+<meta name="ext-resource-dependency" content="icons/teknixian/machinist.png" data-resource-id="tekMachinist" />
+<meta name="ext-resource-dependency" content="icons/teknixian/reliquarian.png" data-resource-id="tekReliquarian" />
+<meta name="ext-resource-dependency" content="icons/duals/illusionist.png" data-resource-id="dualIllusionist" />
+<meta name="ext-resource-dependency" content="icons/duals/lore-keeper.png" data-resource-id="dualLoreKeeper" />
+<meta name="ext-resource-dependency" content="icons/duals/invoker.png" data-resource-id="dualInvoker" />
+<meta name="ext-resource-dependency" content="icons/duals/phantasm.png" data-resource-id="dualPhantasm" />
+<meta name="ext-resource-dependency" content="icons/duals/diabolist.png" data-resource-id="dualDiabolist" />
+<meta name="ext-resource-dependency" content="icons/duals/fortune-teller.png" data-resource-id="dualFortuneTeller" />
+<meta name="ext-resource-dependency" content="icons/duals/channeler.png" data-resource-id="dualChanneler" />
+<meta name="ext-resource-dependency" content="icons/duals/scourge.png" data-resource-id="dualScourge" />
+<meta name="ext-resource-dependency" content="icons/duals/scholar.png" data-resource-id="dualScholar" />
+<meta name="ext-resource-dependency" content="icons/duals/spellweaver.png" data-resource-id="dualSpellweaver" />
+<meta name="ext-resource-dependency" content="icons/duals/necrologist.png" data-resource-id="dualNecrologist" />
+<meta name="ext-resource-dependency" content="icons/duals/songhealer.png" data-resource-id="dualSonghealer" />
+<meta name="ext-resource-dependency" content="icons/duals/drifter.png" data-resource-id="dualDrifter" />
+<meta name="ext-resource-dependency" content="icons/duals/sniper.png" data-resource-id="dualSniper" />
+<meta name="ext-resource-dependency" content="icons/duals/exemplar.png" data-resource-id="dualExemplar" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/reaver.png" data-resource-id="dualReaver" />
+<meta name="ext-resource-dependency" content="icons/duals/nomad.png" data-resource-id="dualNomad" />
+<meta name="ext-resource-dependency" content="icons/duals/saboteur.png" data-resource-id="dualSaboteur" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/outrider.png" data-resource-id="dualOutrider" />
+<meta name="ext-resource-dependency" content="icons/duals/warblade.png" data-resource-id="dualWarblade" />
+<meta name="ext-resource-dependency" content="icons/duals/sapper.png" data-resource-id="dualSapper" />
+<meta name="ext-resource-dependency" content="icons/duals/wildcat.png" data-resource-id="dualWildcat" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/ancestral-blade.png" data-resource-id="dualAncestral" />
+<meta name="ext-resource-dependency" content="icons/duals/weapon-master.png" data-resource-id="dualWeaponMaster" />
+<meta name="ext-resource-dependency" content="icons/duals/shock-trooper.png" data-resource-id="dualShockTrooper" />
+<meta name="ext-resource-dependency" content="icons/duals/trickster.png" data-resource-id="dualTrickster" />
+<meta name="ext-resource-dependency" content="icons/duals/vivisectionist.png" data-resource-id="dualVivisectionist" />
+<meta name="ext-resource-dependency" content="icons/duals/visionary.png" data-resource-id="dualVisionary" />
+<meta name="ext-resource-dependency" content="icons/duals/filch.png" data-resource-id="dualFilch" />
+<meta name="ext-resource-dependency" content="icons/duals/warder.png" data-resource-id="dualWarder" />
+<meta name="ext-resource-dependency" content="icons/duals/theurge.png" data-resource-id="dualTheurge" />
+<meta name="ext-resource-dependency" content="icons/duals/trapsmith.png" data-resource-id="dualTrapsmith" />
+<meta name="ext-resource-dependency" content="icons/duals/warden.png" data-resource-id="dualWarden" />
+<meta name="ext-resource-dependency" content="icons/duals/liberator.png" data-resource-id="dualLiberator" />
+<meta name="ext-resource-dependency" content="icons/duals/valkyrie.png" data-resource-id="dualValkyrie" />
+<meta name="ext-resource-dependency" content="icons/duals/guardian.png" data-resource-id="dualGuardian" />
+<meta name="ext-resource-dependency" content="icons/duals/paladin.png" data-resource-id="dualPaladin" />
+<meta name="ext-resource-dependency" content="icons/duals/judge.png" data-resource-id="dualJudge" />
+<meta name="ext-resource-dependency" content="icons/duals/slayer.png" data-resource-id="dualSlayer" />
+<meta name="ext-resource-dependency" content="icons/duals/mentalist.png" data-resource-id="dualMentalist" />
+<meta name="ext-resource-dependency" content="icons/duals/sybarite.png" data-resource-id="dualSybarite" />
+<meta name="ext-resource-dependency" content="icons/duals/shadow.png" data-resource-id="dualShadow" />
+<meta name="ext-resource-dependency" content="icons/duals/toxitician.png" data-resource-id="dualToxitician" />
+<meta name="ext-resource-dependency" content="icons/duals/rune-warrior.png" data-resource-id="dualRuneWarrior" />
+<meta name="ext-resource-dependency" content="icons/duals/kensai.png" data-resource-id="dualKensai" />
+<meta name="ext-resource-dependency" content="icons/duals/heretic.png" data-resource-id="dualHeretic" />
+<meta name="ext-resource-dependency" content="icons/duals/faith-healer.png" data-resource-id="dualFaithHealer" />
+<meta name="ext-resource-dependency" content="icons/duals/daevic.png" data-resource-id="dualDaevic" />
+<meta name="ext-resource-dependency" content="icons/duals/eldritch-warrior.png" data-resource-id="dualEldritchWarrior" />
+<meta name="ext-resource-dependency" content="icons/duals/musketeer.png" data-resource-id="dualMusketeer" />
+<meta name="ext-resource-dependency" content="icons/duals/fatalist.png" data-resource-id="dualFatalist" />
+<meta name="ext-resource-dependency" content="icons/duals/kaotek.png" data-resource-id="dualKaotek" />
+<meta name="ext-resource-dependency" content="icons/duals/frightmaster.png" data-resource-id="dualFrightmaster" />
+<meta name="ext-resource-dependency" content="icons/duals/ronin.png" data-resource-id="dualRonin" />
+<meta name="ext-resource-dependency" content="icons/duals/mindblade.png" data-resource-id="dualMindblade" />
+<meta name="ext-resource-dependency" content="icons/duals/gothi.png" data-resource-id="dualGothi" />
+<meta name="ext-resource-dependency" content="icons/duals/grimalkin.png" data-resource-id="dualGrimalkin" />
+<meta name="ext-resource-dependency" content="icons/duals/herbalist.png" data-resource-id="dualHerbalist" />
+<meta name="ext-resource-dependency" content="icons/duals/chaplain.png" data-resource-id="dualChaplain" />
+<meta name="ext-resource-dependency" content="icons/duals/renegade.png" data-resource-id="dualRenegade" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/ranger.png" data-resource-id="dualRanger" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/blackthorn.png" data-resource-id="dualBlackthorn" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/inquisitor.png" data-resource-id="dualInquisitor" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/arcane-archer.png" data-resource-id="dualArcaneArcher" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/hexbow.png" data-resource-id="dualHexbow" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/juggler.png" data-resource-id="dualJuggler" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/justiciar.png" data-resource-id="dualJusticiar" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/spirit-guide.png" data-resource-id="dualSpiritGuide" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/deadeye.png" data-resource-id="dualDeadeye" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/hurler.png" data-resource-id="dualHurler" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/blind-archer.png" data-resource-id="dualBlindArcher" />
+<meta name="ext-resource-dependency" content="icons/archer-duals/stargazer.png" data-resource-id="dualStargazer" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/thug.png" data-resource-id="dualThug" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/beastmaster.png" data-resource-id="dualBeastmaster" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/totemist.png" data-resource-id="dualTotemist" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/bear-warrior.png" data-resource-id="dualBearWarrior" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/bloodrager.png" data-resource-id="dualBloodrager" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/spelleater.png" data-resource-id="dualSpelleater" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/outlaw.png" data-resource-id="dualOutlaw" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/martyr.png" data-resource-id="dualMartyr" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/primalist.png" data-resource-id="dualPrimalist" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/skald.png" data-resource-id="dualSkald" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/rage-mage.png" data-resource-id="dualRageMage" />
+<meta name="ext-resource-dependency" content="icons/barbarian-duals/shair.png" data-resource-id="dualShair" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/mesmerist.png" data-resource-id="dualMesmerist" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/bravo.png" data-resource-id="dualBravo" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/enchanter.png" data-resource-id="dualEnchanter" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/songmage.png" data-resource-id="dualSongmage" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/herald.png" data-resource-id="dualHerald" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/magus.png" data-resource-id="dualMagus" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/cartomancer.png" data-resource-id="dualCartomancer" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/songblade.png" data-resource-id="dualSongblade" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/dancer.png" data-resource-id="dualDancer" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/blasphemer.png" data-resource-id="dualBlasphemer" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/shifu.png" data-resource-id="dualShifu" />
+<meta name="ext-resource-dependency" content="icons/bard-duals/chameleon.png" data-resource-id="dualChameleon" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/summoner.png" data-resource-id="dualSummoner" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/technomancer.png" data-resource-id="dualTechnomancer" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/esoteric.png" data-resource-id="dualEsoteric" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/demonologist.png" data-resource-id="dualDemonologist" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/synergist.png" data-resource-id="dualSynergist" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/silhouette.png" data-resource-id="dualSilhouette" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/conduit.png" data-resource-id="dualConduit" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/general.png" data-resource-id="dualGeneral" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/enigma.png" data-resource-id="dualEnigma" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/arsenalist.png" data-resource-id="dualArsenalist" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/mystic.png" data-resource-id="dualMystic" />
+<meta name="ext-resource-dependency" content="icons/binder-duals/tactician.png" data-resource-id="dualTactician" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/blood-mage.png" data-resource-id="dualBloodMage" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/blood-blade.png" data-resource-id="dualBloodBlade" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/hexblade.png" data-resource-id="dualHexblade" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/harrower.png" data-resource-id="dualHarrower" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/divine-blade.png" data-resource-id="dualDivineBlade" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/avenger.png" data-resource-id="dualAvenger" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/brawler.png" data-resource-id="dualBrawler" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/hellion.png" data-resource-id="dualHellion" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/charlatan.png" data-resource-id="dualCharlatan" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/dreamstalker.png" data-resource-id="dualDreamstalker" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/ghostrider.png" data-resource-id="dualGhostrider" />
+<meta name="ext-resource-dependency" content="icons/reaper-duals/ghostfaced-killer.png" data-resource-id="dualGhostfacedKiller" />
+<meta name="ext-resource-dependency" content="images/scout-bg.jpg" data-resource-id="scoutBg" />
+
+<template id="__bundler_thumbnail" data-bg-color="#0a1310">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a1310"/>
+    <circle cx="600" cy="400" r="190" fill="none" stroke="#b8924a" stroke-width="6"/>
+    <circle cx="600" cy="400" r="150" fill="none" stroke="#6fbf7a" stroke-width="3" opacity="0.6"/>
+    <text x="600" y="470" font-family="Georgia, serif" font-size="200" font-weight="500" fill="#6fbf7a" text-anchor="middle">A</text>
+    <g fill="#e0b766">
+      <circle cx="600" cy="190" r="11"/>
+      <circle cx="600" cy="610" r="11"/>
+      <circle cx="390" cy="400" r="11"/>
+      <circle cx="810" cy="400" r="11"/>
+    </g>
+  </svg>
+</template>
+</head>
+<body data-ornaments="on">
+  <div class="scale-host">
+    <div class="stage" id="stage">
+      <div id="root" data-screen-label="Character Codex"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script>
+    // Fit the 1920×1080 stage to any viewport
+    function fitStage() {
+      const stage = document.getElementById("stage");
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      stage.style.transform = "scale(" + s + ")";
+    }
+    window.addEventListener("resize", fitStage);
+    fitStage();
+  </script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script src="codex.gen.js"></script>
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+  <script type="text/babel">
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

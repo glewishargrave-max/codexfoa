@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Archer Icons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #060a08; color: #e8e0c8; font-family: "Cinzel", Georgia, serif; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 56px 40px 80px; }
+  h1 {
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: 0.06em;
+    color: #6fbf7a;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .sub {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7a8b80;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .item {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: block;
+    border-radius: 2px;
+  }
+  .name {
+    margin-top: 14px;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    color: #d4c8a0;
+  }
+  .file {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: #7a8b80;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap" data-screen-label="Archer Icons">
+    <h1>Archer Icons</h1>
+    <div class="sub">10 files · 400 × 400 px · PNG</div>
+    <div class="grid">
+      <a class="item" href="icons/scout.png"        download><img src="icons/scout.png"        alt="Scout"/>       <div class="name">Scout</div>       <div class="file">scout.png</div></a>
+      <a class="item" href="icons/huntsman.png"     download><img src="icons/huntsman.png"     alt="Huntsman"/>    <div class="name">Huntsman</div>    <div class="file">huntsman.png</div></a>
+      <a class="item" href="icons/crossbowman.png"  download><img src="icons/crossbowman.png"  alt="Crossbowman"/> <div class="name">Crossbowman</div> <div class="file">crossbowman.png</div></a>
+      <a class="item" href="icons/marksman.png"     download><img src="icons/marksman.png"     alt="Marksman"/>    <div class="name">Marksman</div>    <div class="file">marksman.png</div></a>
+      <a class="item" href="icons/falconer.png"     download><img src="icons/falconer.png"     alt="Falconer"/>    <div class="name">Falconer</div>    <div class="file">falconer.png</div></a>
+      <a class="item" href="icons/bounty-hunter.png" download><img src="icons/bounty-hunter.png" alt="Bounty Hunter"/><div class="name">Bounty Hunter</div><div class="file">bounty-hunter.png</div></a>
+      <a class="item" href="icons/stalker.png"      download><img src="icons/stalker.png"      alt="Stalker"/>     <div class="name">Stalker</div>     <div class="file">stalker.png</div></a>
+      <a class="item" href="icons/poacher.png"      download><img src="icons/poacher.png"      alt="Poacher"/>     <div class="name">Poacher</div>     <div class="file">poacher.png</div></a>
+      <a class="item" href="icons/sharpshooter.png" download><img src="icons/sharpshooter.png" alt="Sharpshooter"/><div class="name">Sharpshooter</div><div class="file">sharpshooter.png</div></a>
+      <a class="item" href="icons/toxophilite.png"  download><img src="icons/toxophilite.png"  alt="Toxophilite"/> <div class="name">Toxophilite</div> <div class="file">toxophilite.png</div></a>
+    </div>
+  </div>
+</body>
+</html>

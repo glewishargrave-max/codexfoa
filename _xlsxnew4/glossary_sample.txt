@@ -1,0 +1,15 @@
+1: {"1":"Passives"}
+2: {"1":"Accuracy","2":"Accuracy increases the chance for the unit to hit with ranged and melee attacks."}
+3: {"1":"Affliction Duration","2":"Affliction duration increases the duration of afflictions used by the unit."}
+4: {"1":"Affliction Potency","2":"Affliction potency reduces the chance for afflictions used by the unit to be purged."}
+5: {"1":"Affliction Power","2":"Affliction power increases the values of afflictions used by the unit and the chance for them to affect enemies."}
+6: {"1":"Affliction Resist","2":"Affliction resistance reduces the chance for the unit to be affected by afflictions."}
+7: {"1":"Air Adds","2":"Air adds increases air damage which is added to attacks."}
+8: {"1":"Air Piercing","2":"Air piercing reduces the effectiveness of a target’s air resistance against the unit’s abilities."}
+9: {"1":"Air Power","2":"Air power increases the damage and effectiveness of any ability with the air tag."}
+10: {"1":"Air Resist","2":"Air resistance lowers the effectiveness of air abilities on the target."}
+11: {"1":"Alone Damage","2":"Alone damage increases the damage of the unit when it is the last unit left alive."}
+12: {"1":"Alone Defense","2":"Alone defense increases the defense of the unit when it is the last unit left alive."}
+13: {"1":"Amplification","2":"Amplification increases the bonus gained by repeatedly using amplification abilities.  This has no impact on the initial use."}
+14: {"1":"Arcane Power","2":"Arcane power increases the effect of magical abilities that do not have an elemental tag."}
+15: {"1":"Area Damage","2":"Area damage increases the damage dealt by attacks that target all, columns, and rows."}
